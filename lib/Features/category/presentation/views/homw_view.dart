@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smile_shope_dash_board/Features/auth/presentation/views/widgets/sign_up_view_body.dart';
+import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/home_view_body.dart';
+
 import 'package:smile_shope_dash_board/core/widgets/custom_app_bar.dart';
 
 class HomeView extends StatelessWidget {
@@ -7,7 +8,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  Scaffold(
       body:  HomeViewBody(),
     );
   }
