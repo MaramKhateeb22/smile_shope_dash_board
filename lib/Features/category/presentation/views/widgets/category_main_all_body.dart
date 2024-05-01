@@ -12,16 +12,20 @@ class CategoryMainAllBody extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(249, 249, 249, 249),
       appBar: buildAppBar(title: 'الأصناف'),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,childAspectRatio: 2/1,
-          crossAxisSpacing: 2,
-          // mainAxisExtent: 3,
-          mainAxisSpacing: 5
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              childAspectRatio: 1/1.4,
+              crossAxisSpacing: 20,
+            // mainAxisExtent: 3,
+               mainAxisSpacing: 20
 
 
+          ),
+          itemBuilder: (context, index) => CategoryCardWidget()
         ),
-        itemBuilder: (context, index) => CategoryCardWidget()
       ),
     );
   }
