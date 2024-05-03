@@ -4,6 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'Features/category/presentation/views/homw_view.dart';
 import 'Features/category/presentation/views/widgets/category_main_all_body.dart';
+import 'Features/category/presentation/views/sub_category_view.dart';
+import 'Features/product/presentation/views/add_product_view.dart';
 
 
 void main() {
@@ -22,6 +24,18 @@ final GoRouter _router = GoRouter(
         path: '/category_main_all',
         builder: (BuildContext context, GoRouterState state) {
           return const CategoryMainAllBody();
+        }
+    ),
+    GoRoute(
+        path: '/sub_category_view',
+        builder: (BuildContext context, GoRouterState state) {
+          return const SubGategoryView();
+        }
+    ),
+    GoRoute(
+        path: '/add_product_view',
+        builder: (BuildContext context, GoRouterState state) {
+          return const AddProductView();
         }
     ),
   ],

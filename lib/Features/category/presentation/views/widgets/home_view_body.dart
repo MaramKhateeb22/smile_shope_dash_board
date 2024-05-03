@@ -23,7 +23,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('ome page'),
+          title: Text('الصفحة الرئيسية '),
         ),
         drawer: Drawer(
           child: ListView(
