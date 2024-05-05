@@ -28,7 +28,7 @@ class CategoryMainAllBody extends StatelessWidget {
 
 
           ),
-          itemBuilder: (context, index) => CategoryCardWidget(isButton: true,isShowSubCategory: true,isDisplayFlotaingButton: false,)
+          itemBuilder: (context, index) => CategoryCardWidget(isButton: true,isShowSubCategory: true,isDisplayFlotaingButton: false,nextPageInIconDetail: '/sub_category_view',)
         ),
       ),
     );

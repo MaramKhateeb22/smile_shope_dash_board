@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:smile_shope_dash_board/Features/product/presentation/views/detail_product_view.dart';
 
 import 'Features/category/presentation/views/homw_view.dart';
 import 'Features/category/presentation/views/widgets/category_main_all_body.dart';
 import 'Features/category/presentation/views/sub_category_view.dart';
 import 'Features/product/presentation/views/add_product_view.dart';
+import 'Features/product/presentation/views/all_product_view.dart';
 
 
 void main() {
@@ -36,6 +38,17 @@ final GoRouter _router = GoRouter(
         path: '/add_product_view',
         builder: (BuildContext context, GoRouterState state) {
           return const AddProductView();
+        }
+    ),
+    GoRoute(
+        path: '/all_product_view',
+        builder: (BuildContext context, GoRouterState state) {
+          return const AllProductView();
+        }
+    ), GoRoute(
+        path: '/detail_product_view',
+        builder: (BuildContext context, GoRouterState state) {
+          return const DetailProductView();
         }
     ),
   ],
