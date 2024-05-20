@@ -1,6 +1,7 @@
 class EndPoints {
   static String baseUrl = "https://smilestore20002000.000webhostapp.com/api/";
   static String categoryGetAll = "category/get_all";
+  static String addProduct = "add";
 }
 
 class ApiKey {
@@ -11,4 +12,10 @@ class ApiKey {
   static String title1 = "title1";
   static String created_at = "created_at";
   static String updated_at = "updated_at";
+
+  //product
+  static String product_name = "product_name ";
+  static String product_price = "product_price ";
+  static String detail = "detail ";
+  static String image1 = "image1 ";
 }
