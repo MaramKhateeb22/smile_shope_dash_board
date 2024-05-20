@@ -2,20 +2,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/row_with_icons_for_card_product_or_category.dart';
+import '../../manager/category_cubit.dart';
+import '../../../data/models/category_all_get_model.dart';
 
 class CategoryCardWidget extends StatefulWidget {
   CategoryCardWidget(
       {required this.isButton,
       required this.isShowSubCategory,
         this.nextPageInIconDetail,
-      required this.isDisplayFlotaingButton});
+      required this.isDisplayFlotaingButton,
+  required this.title
+      });
   bool isButton = false;
   String? nextPageInIconDetail;
   bool isShowSubCategory = false;
   final bool isDisplayFlotaingButton;
+   String title;
   @override
   State<CategoryCardWidget> createState() => _CategoryCardWidgetState();
 }
@@ -76,7 +82,7 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                 height: 15,
               ),
               RowWithIcons(
-
+                 title: widget.title,
                nextPageInIconDetail:  widget.nextPageInIconDetail,
                 isShowSubCategory: widget.isShowSubCategory,
                 isDisplayFlotaingButton: widget.isDisplayFlotaingButton,
@@ -94,7 +100,10 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                       style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(colorGrey)),
-                      onPressed: () {},
+                      onPressed: () {
+                           context.read<CategoryCubit>().getAllCategory();
+
+                      },
                       child: const Text(
                         'اضافة قسم',
                         style: Styles.style18,

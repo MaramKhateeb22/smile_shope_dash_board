@@ -9,8 +9,10 @@ class RowWithIcons extends StatefulWidget {
    RowWithIcons({
      this.nextPageInIconDetail,
      this.isDisplayFlotaingButton=false,
-     this.isShowSubCategory=false});
+     this.isShowSubCategory=false,
+   this.title});
 String? nextPageInIconDetail;
+String? title;
  final bool isShowSubCategory;
   final bool isDisplayFlotaingButton;
 
@@ -32,7 +34,7 @@ class _RowWithIconsState extends State<RowWithIcons> {
           flex: 1,
         ),
         Text(
-          'أحذية',
+          "${widget.title}",
           style: TextStyle(fontSize: 25),
         ),
         Spacer(

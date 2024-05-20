@@ -1,6 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smile_shope_dash_board/Features/category/data/repos/repo.dart';
+import 'package:smile_shope_dash_board/Features/category/presentation/manager/category_cubit.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/category_main_all.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/views/detail_product_view.dart';
 
@@ -9,6 +13,7 @@ import 'Features/category/presentation/views/sub_category_view.dart';
 import 'Features/category/presentation/views/widgets/category_main_all_body.dart';
 import 'Features/product/presentation/views/add_product_view.dart';
 import 'Features/product/presentation/views/all_product_view.dart';
+import 'core/utils/api/dio_consumer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -68,22 +73,33 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: ThemeData(
-          listTileTheme: const ListTileThemeData(iconColor: Colors.orange),
-          iconTheme: const IconThemeData(color: Colors.orange)),
-      localizationsDelegates: const [
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CategoryCubit>(
+          create: (context) => CategoryCubit(
+            CategoryRepositry(
+              api: DioConsumer(dio: Dio()),
+            ),
+          ),
+        ),
       ],
-      supportedLocales: const [
-        Locale("ar", "AE"), // OR Locale('ar', 'AE') OR Other RTL locales
-      ],
-      locale: const Locale("ar", "AE"),
-      routerConfig: _router,
-      // routeInformationParser: _router.routeInformationParser,
-      // routerDelegate: _router.routerDelegate,
+      child: MaterialApp.router(
+        theme: ThemeData(
+            listTileTheme: const ListTileThemeData(iconColor: Colors.orange),
+            iconTheme: const IconThemeData(color: Colors.orange)),
+        localizationsDelegates: const [
+          GlobalCupertinoLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale("ar", "AE"), // OR Locale('ar', 'AE') OR Other RTL locales
+        ],
+        locale: const Locale("ar", "AE"),
+        routerConfig: _router,
+        // routeInformationParser: _router.routeInformationParser,
+        // routerDelegate: _router.routerDelegate,
+      ),
     );
   }
 }
