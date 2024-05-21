@@ -1,7 +1,7 @@
 import 'package:smile_shope_dash_board/core/utils/api/end_points.dart';
 
 class ProductGetAllModel {
-  List<Data>? data;
+  List<DataProduct>? data;
   String? massege;
   int? status;
 
@@ -9,9 +9,9 @@ class ProductGetAllModel {
 
   ProductGetAllModel.fromJson(Map<String, dynamic> json) {
     if (json[ApiKey.data] != null) {
-      data = <Data>[];
+      data = <DataProduct>[];
       json[ApiKey.data].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new DataProduct.fromJson(v));
       });
     }
     massege = json[ApiKey.massege];
@@ -29,7 +29,7 @@ class ProductGetAllModel {
   }
 }
 
-class Data {
+class DataProduct {
   int? id;
   String? productName;
   int? productPrice;
@@ -39,7 +39,7 @@ class Data {
   String? createdAt;
   String? updatedAt;
 
-  Data(
+  DataProduct(
       {this.id,
       this.productName,
       this.productPrice,
@@ -49,7 +49,7 @@ class Data {
       this.createdAt,
       this.updatedAt});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  DataProduct.fromJson(Map<String, dynamic> json) {
     id = json[ApiKey.id];
     productName = json[ApiKey.product_name];
     productPrice = json[ApiKey.product_price];

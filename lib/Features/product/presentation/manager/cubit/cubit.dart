@@ -16,7 +16,7 @@ class ProductCubit extends Cubit<ProductState> {
   ProductCubit get(context) => BlocProvider.of(context);
   // ApiConsumer api;
   ProductRepo allProductRepo;
-  List<ProductGetAllModel>? allProduct;
+  ProductGetAllModel? allProduct;
   final formkey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
@@ -91,8 +91,8 @@ class ProductCubit extends Cubit<ProductState> {
     final response = await allProductRepo.productGetAll();
     response
         .fold((errMessage) => emit(AllProductsFailerState(error: errMessage)),
-            (user) {
-      allProduct = user;
+            (product) {
+      allProduct = product;
       emit(AllProductsSuccessState());
     });
   }

@@ -8,22 +8,23 @@ class ProductRepo {
   final ApiConsumer api;
   ProductRepo({required this.api});
 
-  Future<Either<String, List<ProductGetAllModel>>> productGetAll() async {
+  Future<Either<String, ProductGetAllModel>> productGetAll() async {
     try {
       final response = await api.get(
         EndPoints.productGetAll,
       );
-      if (response is List) {
-        final ProductList = response
-            .map((productData) => ProductGetAllModel.fromJson(productData))
-            .toList();
+      // if (response is List) {
+      //   final ProductList = response
+      //       .map((productData) => ProductGetAllModel.fromJson(productData))
+      //       .toList();
 
-        print("Category of first product is ${ProductList[0].massege}");
+      //   print("Category of first product is ${ProductList[0].massege}");
 
-        return Right(ProductList);
-      } else {
-        return Left('Expected a list but got ${response.runtimeType}');
-      }
+      //   return Right(ProductList);
+      // } else {
+      //   return Left('Expected a list but got ${response.runtimeType}');
+      // }
+      return Right(ProductGetAllModel.fromJson(response));
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     }
