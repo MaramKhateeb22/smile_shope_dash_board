@@ -4,15 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
+import 'package:smile_shope_dash_board/Features/product/data/repo/repo.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/state.dart';
 import 'package:smile_shope_dash_board/core/utils/constants.dart';
 
-class AddProductCubit extends Cubit<AddProductState> {
+class ProductCubit extends Cubit<ProductState> {
   // AddProductCubit(super.AddProductInitalState, this.api);
 
-  AddProductCubit() : super(AddProductImageInitalState());
-  static AddProductCubit get(context) => BlocProvider.of(context);
+  ProductCubit(this.allProductRepo) : super(ProductImageInitalState());
+  ProductCubit get(context) => BlocProvider.of(context);
   // ApiConsumer api;
+  ProductRepo allProductRepo;
+  List<ProductGetAllModel>? allProduct;
   final formkey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
@@ -81,4 +85,15 @@ class AddProductCubit extends Cubit<AddProductState> {
   //     });
   //   } catch (e) {}
   // }
+
+  getAllProducts() async {
+    emit(AllProductsLoadingState());
+    final response = await allProductRepo.productGetAll();
+    response
+        .fold((errMessage) => emit(AllProductsFailerState(error: errMessage)),
+            (user) {
+      allProduct = user;
+      emit(AllProductsSuccessState());
+    });
+  }
 }

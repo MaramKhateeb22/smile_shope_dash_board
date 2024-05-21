@@ -1,29 +1,41 @@
-abstract class AddProductState {}
+abstract class ProductState {}
 
-class AddProductImageInitalState extends AddProductState {}
+class ProductImageInitalState extends ProductState {}
 
-class AddProductImageLoadingState extends AddProductState {}
+class ProductImageLoadingState extends ProductState {}
 
-class AddProductImageSuccessState extends AddProductState {}
+class ProductImageSuccessState extends ProductState {}
 
-class AddProductImageErrorState extends AddProductState {
+class ProductImageErrorState extends ProductState {
   final String error;
 
-  AddProductImageErrorState({required this.error});
+  ProductImageErrorState({required this.error});
 }
 
-class SelectImageState extends AddProductState {}
+class SelectImageState extends ProductState {}
 
-class AddProductInitalState extends AddProductState {}
+class ProductInitalState extends ProductState {}
 
-class AddProductLoadingState extends AddProductState {}
+class ProductLoadingState extends ProductState {}
 
-class AddProductSuccessState extends AddProductState {}
+class ProductSuccessState extends ProductState {}
 
-class AddProductErrorState extends AddProductState {
+class ProductErrorState extends ProductState {
   final String error;
 
-  AddProductErrorState({required this.error});
+  ProductErrorState({required this.error});
 }
 
-class ClearFormState extends AddProductState {}
+class ClearFormState extends ProductState {}
+
+//
+///get all products
+class AllProductsLoadingState extends ProductState {}
+
+class AllProductsSuccessState extends ProductState {}
+
+class AllProductsFailerState extends ProductState {
+  final String error;
+
+  AllProductsFailerState({required this.error});
+}

@@ -9,166 +9,163 @@ class CustomAddProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AddProductCubit(),
-      child: BlocConsumer<AddProductCubit, AddProductState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('إضافة منتج '),
-            ),
-            body: SingleChildScrollView(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
-                  child: Form(
-                    // key: ,
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(15)),
-                      width: 400,
-                      // height: double.infinity,
-                      child: Column(
-                        children: [
-                          DottedBorder(
-                            borderType: BorderType.RRect,
-                            strokeWidth: 1,
-                            color: Colors.red.shade200,
-                            radius: const Radius.circular(15),
-                            child: Container(
-                              // clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                // borderRadius: BorderRadius.circular(15),
-                                color: Colors.grey.shade200,
-                              ),
-                              width: 300,
-                              height: 130,
-                              child: context
-                                          .read<AddProductCubit>()
-                                          .imageProduct ==
-                                      null
-                                  ? Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        color: Colors.grey.shade100,
-                                      ),
-                                      child: Stack(
-                                        children: [
-                                          Positioned(
-                                            // bottom: 5,
-                                            // right: 5,
-                                            child: InkWell(
-                                              onTap: () {
-                                                context
-                                                    .read<AddProductCubit>()
-                                                    .selectImage(context);
-                                              },
-                                              child: const Center(
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Icon(Icons
-                                                        .add_photo_alternate_outlined),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Text('أضف صورة المنتج'),
-                                                  ],
-                                                ),
+    return BlocConsumer<ProductCubit, ProductState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('إضافة منتج '),
+          ),
+          body: SingleChildScrollView(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
+                child: Form(
+                  // key: ,
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(15)),
+                    width: 400,
+                    // height: double.infinity,
+                    child: Column(
+                      children: [
+                        DottedBorder(
+                          borderType: BorderType.RRect,
+                          strokeWidth: 1,
+                          color: Colors.red.shade200,
+                          radius: const Radius.circular(15),
+                          child: Container(
+                            // clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              // borderRadius: BorderRadius.circular(15),
+                              color: Colors.grey.shade200,
+                            ),
+                            width: 300,
+                            height: 130,
+                            child: context
+                                        .read<ProductCubit>()
+                                        .imageProduct ==
+                                    null
+                                ? Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: Colors.grey.shade100,
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        Positioned(
+                                          // bottom: 5,
+                                          // right: 5,
+                                          child: InkWell(
+                                            onTap: () {
+                                              context
+                                                  .read<ProductCubit>()
+                                                  .selectImage(context);
+                                            },
+                                            child: const Center(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(Icons
+                                                      .add_photo_alternate_outlined),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text('أضف صورة المنتج'),
+                                                ],
                                               ),
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    )
-                                  :
-                                  // width: 200,
-                                  // height: 200,
-                                  Container(
-                                      // clipBehavior: Clip.antiAlias,
-                                      child: Image.memory(
-                                        context
-                                            .read<AddProductCubit>()
-                                            .imageProduct!,
-                                        fit: BoxFit.cover,
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                            ),
+                                  )
+                                :
+                                // width: 200,
+                                // height: 200,
+                                Container(
+                                    // clipBehavior: Clip.antiAlias,
+                                    child: Image.memory(
+                                      context
+                                          .read<ProductCubit>()
+                                          .imageProduct!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                           ),
-                          const SizedBox(
-                            height: 20,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          // controller: phoneController,
+                          keyboardType: TextInputType.name,
+                          decoration: const InputDecoration(
+                            label: Text('أدخل اسم المنتج'),
+                            hintText: 'اسم المنتج ',
+                            prefixIcon: Icon(Icons.shopping_basket),
+                            border: OutlineInputBorder(),
                           ),
-                          TextFormField(
-                            // controller: phoneController,
-                            keyboardType: TextInputType.name,
-                            decoration: const InputDecoration(
-                              label: Text('أدخل اسم المنتج'),
-                              hintText: 'اسم المنتج ',
-                              prefixIcon: Icon(Icons.shopping_basket),
-                              border: OutlineInputBorder(),
-                            ),
-                            onFieldSubmitted: (value) {
-                              print(value);
-                            },
+                          onFieldSubmitted: (value) {
+                            print(value);
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          // controller: phoneController,
+                          keyboardType: TextInputType.name,
+                          decoration: const InputDecoration(
+                            label: Text('أدخل اسم تفاصيل  المنتج'),
+                            hintText: 'تفاصيل  المنتج ',
+                            prefixIcon: Icon(Icons.details),
+                            border: OutlineInputBorder(),
                           ),
-                          const SizedBox(
-                            height: 20,
+                          onFieldSubmitted: (value) {
+                            print(value);
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          // controller: phoneController,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            label: Text('سعر  المنتج'),
+                            hintText: 'أدخل السعر  المنتج ',
+                            prefixIcon: Icon(Icons.monetization_on_outlined),
+                            border: OutlineInputBorder(),
                           ),
-                          TextFormField(
-                            // controller: phoneController,
-                            keyboardType: TextInputType.name,
-                            decoration: const InputDecoration(
-                              label: Text('أدخل اسم تفاصيل  المنتج'),
-                              hintText: 'تفاصيل  المنتج ',
-                              prefixIcon: Icon(Icons.details),
-                              border: OutlineInputBorder(),
-                            ),
-                            onFieldSubmitted: (value) {
-                              print(value);
-                            },
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextFormField(
-                            // controller: phoneController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                              label: Text('سعر  المنتج'),
-                              hintText: 'أدخل السعر  المنتج ',
-                              prefixIcon: Icon(Icons.monetization_on_outlined),
-                              border: OutlineInputBorder(),
-                            ),
-                            onFieldSubmitted: (value) {
-                              print(value);
-                            },
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          MaterialButton(
-                            onPressed: () {},
-                            color: const Color.fromARGB(255, 236, 245, 252),
-                            elevation: 5,
-                            child: const Text('حفظ '),
-                          )
-                        ],
-                      ),
+                          onFieldSubmitted: (value) {
+                            print(value);
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        MaterialButton(
+                          onPressed: () {},
+                          color: const Color.fromARGB(255, 236, 245, 252),
+                          elevation: 5,
+                          child: const Text('حفظ '),
+                        )
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

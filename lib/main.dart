@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:smile_shope_dash_board/Features/category/data/repos/repo.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/manager/category_cubit.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/category_main_all.dart';
+import 'package:smile_shope_dash_board/Features/product/data/repo/repo.dart';
+import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/views/detail_product_view.dart';
 
 import 'Features/category/presentation/views/homw_view.dart';
@@ -78,6 +80,13 @@ class MyApp extends StatelessWidget {
         BlocProvider<CategoryCubit>(
           create: (context) => CategoryCubit(
             CategoryRepositry(
+              api: DioConsumer(dio: Dio()),
+            ),
+          ),
+        ),
+        BlocProvider<ProductCubit>(
+          create: (context) => ProductCubit(
+            ProductRepo(
               api: DioConsumer(dio: Dio()),
             ),
           ),
