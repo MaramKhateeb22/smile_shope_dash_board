@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 import 'package:smile_shope_dash_board/core/utils/styles.dart';
 import 'package:smile_shope_dash_board/core/widgets/row_with_icons_for_card_product_or_category.dart';
 
 class CustomAllProductWidget extends StatelessWidget {
   CustomAllProductWidget({required this.product, super.key});
-  DataProduct product;
+  String product;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -48,14 +47,14 @@ class CustomAllProductWidget extends StatelessWidget {
                           flex: 2,
                         ),
                         Text(
-                          '${product.productName} ',
+                          '$product ',
                           style: Styles.style18,
                         ),
                         const Spacer(
                           flex: 6,
                         ),
-                        Text(
-                          r'$ ' '${product.productPrice}',
+                        const Text(
+                          r'$ ',
                           style: Styles.style18,
                         ),
                         const Spacer(

@@ -17,6 +17,7 @@ class ProductCubit extends Cubit<ProductState> {
   // ApiConsumer api;
   ProductRepo allProductRepo;
   ProductGetAllModel? allProduct;
+
   final formkey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
@@ -89,10 +90,12 @@ class ProductCubit extends Cubit<ProductState> {
   getAllProducts() async {
     emit(AllProductsLoadingState());
     final response = await allProductRepo.productGetAll();
+
     response
         .fold((errMessage) => emit(AllProductsFailerState(error: errMessage)),
             (product) {
       allProduct = product;
+      print('222222222222222' "${allProduct!.data![0].productName!}");
       emit(AllProductsSuccessState());
     });
   }

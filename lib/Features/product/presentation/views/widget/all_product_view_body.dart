@@ -24,15 +24,13 @@ class AllProductViewBody extends StatelessWidget {
             } else {
               ProductGetAllModel allProduct =
                   context.read<ProductCubit>().allProduct!;
+              print("kkkkkkkkkkkkkkkkkkkkkkkkkkk" "${allProduct.data}");
 
               return GridView.builder(
                 itemCount: allProduct.data!.length,
                 itemBuilder: (context, index) {
-                  DataProduct product = allProduct.data![index];
-                  print('dfjlfds....................................'
-                      '${product.detail}');
                   return CustomAllProductWidget(
-                    product: product,
+                    product: allProduct.data![index].productName!,
                   );
                 },
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
