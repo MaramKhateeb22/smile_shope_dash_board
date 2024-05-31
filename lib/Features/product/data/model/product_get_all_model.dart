@@ -1,35 +1,108 @@
-import 'package:smile_shope_dash_board/core/utils/api/end_points.dart';
+// import 'package:smile_shope_dash_board/core/utils/api/end_points.dart';
+
+// class ProductGetAllModel {
+//   List<DataProduct>? data;
+//   String? massege;
+//   int? status;
+
+//   ProductGetAllModel({this.data, this.massege, this.status});
+
+//   ProductGetAllModel.fromJson(Map<String, dynamic> json) {
+//     if (json[ApiKey.data] != null) {
+//       data = <DataProduct>[];
+//       json[ApiKey.data].forEach((v) {
+//         data!.add(DataProduct.fromJson(v));
+//       });
+//     }
+//     massege = json[ApiKey.massege];
+//     status = json[ApiKey.status];
+//   }
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     if (this.data != null) {
+//       data[ApiKey.data] = this.data!.map((v) => v.toJson()).toList();
+//     }
+//     data[ApiKey.massege] = massege;
+//     data[ApiKey.status] = status;
+//     return data;
+//   }
+// }
+
+// class DataProduct {
+//   int? id;
+//   String? productName;
+//   int? productPrice;
+//   String? detail;
+//   String? image1;
+//   int? subCategoryId;
+//   String? createdAt;
+//   String? updatedAt;
+
+//   DataProduct(
+//       {this.id,
+//       this.productName,
+//       this.productPrice,
+//       this.detail,
+//       this.image1,
+//       this.subCategoryId,
+//       this.createdAt,
+//       this.updatedAt});
+
+//   DataProduct.fromJson(Map<String, dynamic> json) {
+//     id = json[ApiKey.id];
+//     productName = json[ApiKey.product_name];
+//     productPrice = json[ApiKey.product_price];
+//     detail = json[ApiKey.detail];
+//     image1 = json[ApiKey.image1];
+//     subCategoryId = json[ApiKey.sub_category_id];
+//     createdAt = json[ApiKey.created_at];
+//     updatedAt = json[ApiKey.updated_at];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = <String, dynamic>{};
+//     data[ApiKey.id] = id;
+//     data[ApiKey.product_name] = productName;
+//     data[ApiKey.product_price] = productPrice;
+//     data[ApiKey.detail] = detail;
+//     data[ApiKey.image1] = image1;
+//     data[ApiKey.sub_category_id] = subCategoryId;
+//     data[ApiKey.created_at] = createdAt;
+//     data[ApiKey.updated_at] = updatedAt;
+//     return data;
+//   }
+// }
 
 class ProductGetAllModel {
-  List<DataProduct>? data;
+  List<Data>? data;
   String? massege;
   int? status;
 
   ProductGetAllModel({this.data, this.massege, this.status});
 
   ProductGetAllModel.fromJson(Map<String, dynamic> json) {
-    if (json[ApiKey.data] != null) {
-      data = <DataProduct>[];
-      json[ApiKey.data].forEach((v) {
-        data!.add(new DataProduct.fromJson(v));
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(Data.fromJson(v));
       });
     }
-    massege = json[ApiKey.massege];
-    status = json[ApiKey.status];
+    massege = json['massege'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
-      data[ApiKey.data] = this.data!.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data[ApiKey.massege] = this.massege;
-    data[ApiKey.status] = this.status;
+    data['massege'] = massege;
+    data['status'] = status;
     return data;
   }
 }
 
-class DataProduct {
+class Data {
   int? id;
   String? productName;
   int? productPrice;
@@ -39,7 +112,7 @@ class DataProduct {
   String? createdAt;
   String? updatedAt;
 
-  DataProduct(
+  Data(
       {this.id,
       this.productName,
       this.productPrice,
@@ -49,27 +122,27 @@ class DataProduct {
       this.createdAt,
       this.updatedAt});
 
-  DataProduct.fromJson(Map<String, dynamic> json) {
-    id = json[ApiKey.id];
-    productName = json[ApiKey.product_name];
-    productPrice = json[ApiKey.product_price];
-    detail = json[ApiKey.detail];
-    image1 = json[ApiKey.image1];
-    subCategoryId = json[ApiKey.sub_category_id];
-    createdAt = json[ApiKey.created_at];
-    updatedAt = json[ApiKey.updated_at];
+  Data.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    productName = json['product_name'];
+    productPrice = json['product_price'];
+    detail = json['detail'];
+    image1 = json['image1'];
+    subCategoryId = json['sub_category_id'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data[ApiKey.id] = this.id;
-    data[ApiKey.product_name] = this.productName;
-    data[ApiKey.product_price] = this.productPrice;
-    data[ApiKey.detail] = this.detail;
-    data[ApiKey.image1] = this.image1;
-    data[ApiKey.sub_category_id] = this.subCategoryId;
-    data[ApiKey.created_at] = this.createdAt;
-    data[ApiKey.updated_at] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['product_name'] = productName;
+    data['product_price'] = productPrice;
+    data['detail'] = detail;
+    data['image1'] = image1;
+    data['sub_category_id'] = subCategoryId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

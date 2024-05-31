@@ -13,7 +13,7 @@ class ProductCubit extends Cubit<ProductState> {
   // AddProductCubit(super.AddProductInitalState, this.api);
 
   ProductCubit(this.allProductRepo) : super(ProductImageInitalState());
-  ProductCubit get(context) => BlocProvider.of(context);
+  // ProductCubit get(context) => BlocProvider.of(context);
   // ApiConsumer api;
   ProductRepo allProductRepo;
   ProductGetAllModel? allProduct;
@@ -95,8 +95,14 @@ class ProductCubit extends Cubit<ProductState> {
         .fold((errMessage) => emit(AllProductsFailerState(error: errMessage)),
             (product) {
       allProduct = product;
-      print('222222222222222' "${allProduct!.data![0].productName!}");
+      allProduct!.data!.sort((a, b) => a.createdAt!.compareTo(b.createdAt!));
+      print('222222222222222' "allProduct!.data![0].productName!");
       emit(AllProductsSuccessState());
     });
+    //         (product) {
+    //   allProduct = product;
+    //   print('222222222222222\n' "${allProduct!.data![0].productName!}");
+    //   emit(AllProductsSuccessState());
+    // });
   }
 }

@@ -19,18 +19,21 @@ class AllProductViewBody extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(child: Text('حدث خطأ: ${snapshot.error}'));
-            } else {
+            }
+            // else if (snapshot.hasError) {
+            //   return Center(child: Text('حدث خطأ: ${snapshot.error}'));
+            // }
+            else {
               ProductGetAllModel allProduct =
                   context.read<ProductCubit>().allProduct!;
-              print("kkkkkkkkkkkkkkkkkkkkkkkkkkk" "${allProduct.data}");
+              print(
+                  "kkkkkkkkkkkkkkkkkkkkkkkkkkkallproduct" "${allProduct.data}");
 
               return GridView.builder(
                 itemCount: allProduct.data!.length,
                 itemBuilder: (context, index) {
                   return CustomAllProductWidget(
-                    product: allProduct.data![index].productName!,
+                    product: allProduct.data![index],
                   );
                 },
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
