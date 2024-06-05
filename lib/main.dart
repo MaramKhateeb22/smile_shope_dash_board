@@ -87,8 +87,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProductCubit>(
           create: (context) => ProductCubit(
             ProductRepo(
+        
               api: DioConsumer(dio: Dio()),
-            ),
+            )
           ),
         ),
       ],

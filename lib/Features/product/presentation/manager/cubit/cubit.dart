@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:smile_shope_dash_board/Features/product/data/model/product_delete_modle.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
 import 'package:smile_shope_dash_board/Features/product/data/repo/repo.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/state.dart';
@@ -12,11 +13,14 @@ import 'package:smile_shope_dash_board/core/utils/constants.dart';
 class ProductCubit extends Cubit<ProductState> {
   // AddProductCubit(super.AddProductInitalState, this.api);
 
-  ProductCubit(this.allProductRepo) : super(ProductImageInitalState());
+  ProductCubit(
+    this.productRepo,
+  ) : super(ProductImageInitalState());
   // ProductCubit get(context) => BlocProvider.of(context);
   // ApiConsumer api;
-  ProductRepo allProductRepo;
+  ProductRepo productRepo;
   ProductGetAllModel? allProduct;
+  ProductDeleteModel? deleteProduct;
 
   final formkey = GlobalKey<FormState>();
 
@@ -89,7 +93,7 @@ class ProductCubit extends Cubit<ProductState> {
 
   getAllProducts() async {
     emit(AllProductsLoadingState());
-    final response = await allProductRepo.productGetAll();
+    final response = await productRepo.productGetAll();
 
     response
         .fold((errMessage) => emit(AllProductsFailerState(error: errMessage)),
@@ -104,5 +108,20 @@ class ProductCubit extends Cubit<ProductState> {
     //   print('222222222222222\n' "${allProduct!.data![0].productName!}");
     //   emit(AllProductsSuccessState());
     // });
+  }
+
+//Delete product Function
+  deleteProductFunction(String id, context) async {
+    emit(DeleteLoadingState());
+    final response = await productRepo.productDelete(id);
+    response.fold((errMessage) {
+      emit(AllProductsFailerState(error: errMessage));
+      message(context, errMessage);
+    }, (product) {
+      deleteProduct = product;
+      emit(AllProductsSuccessState());
+
+      message(context, 'تم الحذف بنجاح');
+    });
   }
 }

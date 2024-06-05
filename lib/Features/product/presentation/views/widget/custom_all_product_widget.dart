@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
-import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 import 'package:smile_shope_dash_board/core/utils/styles.dart';
+import 'package:smile_shope_dash_board/core/widgets/row_with_icons_for_card_product_or_category.dart';
 
 class CustomAllProductWidget extends StatelessWidget {
   CustomAllProductWidget({required this.product, super.key});
@@ -16,8 +15,8 @@ class CustomAllProductWidget extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              context.read<ProductCubit>().getAllProducts();
-              print('Hellew');
+              // context.read<ProductCubit>().getAllProducts();
+              // print('Hellew');
             },
             child: Card(
               elevation: 5,
@@ -30,13 +29,14 @@ class CustomAllProductWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Padding(
-                    //   padding: const EdgeInsets.only(top: 40),
-                    //   child: RowWithIcons(
-                    //     isShowSubCategory: true,
-                    //     nextPageInIconDetail: '/detail_product_view',
-                    //   ),
-                    // ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: RowWithIcons(
+                        id: product.id,
+                        isShowSubCategory: true,
+                        nextPageInIconDetail: '/detail_product_view',
+                      ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -47,7 +47,7 @@ class CustomAllProductWidget extends StatelessWidget {
                           flex: 2,
                         ),
                         Text(
-                          '${product.productName} ',
+                          '${product.id} ',
                           style: Styles.style18,
                         ),
                         const Spacer(
@@ -70,7 +70,7 @@ class CustomAllProductWidget extends StatelessWidget {
           const Positioned(
             right: 0,
             left: 0,
-            top: -160,
+            top: -190,
             // child: Text('${product.image1}'),
             child: Image(
               image: AssetImage('assets/images/photo1.png'),

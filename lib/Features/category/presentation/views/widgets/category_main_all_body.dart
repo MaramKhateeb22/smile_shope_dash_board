@@ -34,8 +34,13 @@ class CategoryMainAllBody extends StatelessWidget {
               print("kkkkkkkkkkkkkkkkkkkkkkkkkkkallcategory"
                   "${allCategory.data}");
               return GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: MediaQuery.of(context).size.width > 1115
+                        ? 4
+                        : MediaQuery.of(context).size.width > 650
+                            ? 2
+                            : 1,
+                    // crossAxisCount: 4,
                     childAspectRatio: 1 / 1.45,
                     crossAxisSpacing: 20,
                     mainAxisSpacing: 20),

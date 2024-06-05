@@ -2,11 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
+import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/state.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/views/widget/custom_all_product_widget.dart';
+import 'package:smile_shope_dash_board/core/utils/constants.dart';
 
-class AllProductViewBody extends StatelessWidget {
+class AllProductViewBody extends StatefulWidget {
   const AllProductViewBody({super.key});
 
+  @override
+  State<AllProductViewBody> createState() => _AllProductViewBodyState();
+}
+
+class _AllProductViewBodyState extends State<AllProductViewBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,19 +36,31 @@ class AllProductViewBody extends StatelessWidget {
               print(
                   "kkkkkkkkkkkkkkkkkkkkkkkkkkkallproduct" "${allProduct.data}");
 
-              return GridView.builder(
-                itemCount: allProduct.data!.length,
-                itemBuilder: (context, index) {
-                  return CustomAllProductWidget(
-                    product: allProduct.data![index],
+              return BlocConsumer<ProductCubit, ProductState>(
+                listener: (context, state) {
+                  if (state is DeleteSuccessState) {
+                    message(context, 'تم الحذف بنجاح ');
+                  }
+
+                  setState(() {});
+                },
+                builder: (context, state) {
+                  return GridView.builder(
+                    itemCount: allProduct.data!.length,
+                    itemBuilder: (context, index) {
+                      return CustomAllProductWidget(
+                        product: allProduct.data![index],
+                      );
+                    },
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 40,
+                      childAspectRatio: 2 / 1.6,
+                      crossAxisSpacing: 60,
+                      crossAxisCount: 3,
+                    ),
                   );
                 },
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: 40,
-                  childAspectRatio: 2 / 1.6,
-                  crossAxisSpacing: 60,
-                  crossAxisCount: 3,
-                ),
               );
             }
           },

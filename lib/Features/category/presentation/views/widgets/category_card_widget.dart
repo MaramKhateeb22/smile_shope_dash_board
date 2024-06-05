@@ -13,15 +13,14 @@ class CategoryCardWidget extends StatefulWidget {
   CategoryCardWidget(
       {required this.isButton,
       required this.isShowSubCategory,
-        this.nextPageInIconDetail,
+      this.nextPageInIconDetail,
       required this.isDisplayFlotaingButton,
-  required this.title
-      });
+      required this.title});
   bool isButton = false;
   String? nextPageInIconDetail;
   bool isShowSubCategory = false;
   final bool isDisplayFlotaingButton;
-   String title;
+  String title;
   @override
   State<CategoryCardWidget> createState() => _CategoryCardWidgetState();
 }
@@ -61,7 +60,7 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        borderRadius:const BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(15),
                             topRight: Radius.circular(15)),
                         color: colorGrey),
@@ -82,16 +81,14 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                 height: 15,
               ),
               RowWithIcons(
-                 title: widget.title,
-               nextPageInIconDetail:  widget.nextPageInIconDetail,
+                title: widget.title,
+                nextPageInIconDetail: widget.nextPageInIconDetail,
                 isShowSubCategory: widget.isShowSubCategory,
                 isDisplayFlotaingButton: widget.isDisplayFlotaingButton,
               ),
-
               const Spacer(
                 flex: 1,
               ),
-
               Visibility(
                 visible: widget.isButton, // تحديد إذا كان يجب عرض الزر أم لا
                 child: Column(
@@ -101,8 +98,7 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                           backgroundColor:
                               MaterialStateProperty.all(colorGrey)),
                       onPressed: () {
-                           context.read<CategoryCubit>().getAllCategory();
-
+                        context.read<CategoryCubit>().getAllCategory();
                       },
                       child: const Text(
                         'اضافة قسم',
@@ -112,10 +108,9 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                   ],
                 ),
               ),
-          const    Spacer(
+              const Spacer(
                 flex: 1,
               ),
-
             ],
           ),
         ),

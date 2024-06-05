@@ -1,13 +1,14 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 
-buildShwoDialogDelete(BuildContext context){
+buildShwoDialogDelete(BuildContext context, int? id) {
   return showDialog(
     context: context,
     builder: (BuildContext context) {
       // هذا الحوار يحتوي على النص الكامل داخل SingleChildScrollView
       return AlertDialog(
-        content: SingleChildScrollView(
+        content: const SingleChildScrollView(
           child: Text(
             'حقا تريد الحذف؟!',
           ),
@@ -16,16 +17,20 @@ buildShwoDialogDelete(BuildContext context){
           TextButton(
             child: const Text('اغلاق'),
             onPressed: () {
-              Navigator.of(context)
-                  .pop(); // يغلق الحوار
+              Navigator.of(context).pop(); // يغلق الحوار
             },
           ),
           TextButton(
             child: const Text('نعم '),
             onPressed: () {
-              //function Delete
-              Navigator.of(context)
-                  .pop(); // يغلق الحوار
+              // setState(() {});
+              context
+                  .read<ProductCubit>()
+                  .deleteProductFunction(id!.toString(), context);
+
+              // //function Delete
+              Navigator.of(context).pop();
+              // يغلق الحوار
             },
           ),
         ],

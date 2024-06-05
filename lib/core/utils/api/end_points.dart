@@ -3,6 +3,9 @@ class EndPoints {
   static String categoryGetAll = "category/get_all";
   static String productGetAll = "product/get_all";
   static String addProduct = "add";
+  static String deleteProduct(id) {
+    return "product/delete/$id";
+  }
 }
 
 class ApiKey {
