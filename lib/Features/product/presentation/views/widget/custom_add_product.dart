@@ -45,9 +45,7 @@ class CustomAddProductWidget extends StatelessWidget {
                             ),
                             width: 300,
                             height: 130,
-                            child: context
-                                        .read<ProductCubit>()
-                                        .imageProduct ==
+                            child: context.read<ProductCubit>().imageProduct ==
                                     null
                                 ? Container(
                                     decoration: BoxDecoration(
@@ -103,6 +101,57 @@ class CustomAddProductWidget extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
+
+                        // FutureBuilder<dynamic>(
+                        //   future: ,
+                        //   builder: (BuildContext context,
+                        //      snapshot) {
+                        //     if (snapshot.connectionState ==
+                        //         ConnectionState.waiting) {
+                        //       return const Center(
+                        //           child: CircularProgressIndicator());
+                        //     }
+                        //     if (snapshot.hasError) {
+                        //       return Center(
+                        //           child: Text('Error: ${snapshot.error}'));
+                        //     }
+                        //     if (snapshot.hasData) {
+                        //       // تحويل البيانات إلى قائمة من DropdownMenuItem
+                        //       List<DropdownMenuItem<String>> insectItems =
+                        //           snapshot.data!.docs
+                        //               .map((DocumentSnapshot document) {
+                        //         Map<String, dynamic> insectData =
+                        //             document.data()! as Map<String, dynamic>;
+                        //         String insectName = insectData[
+                        //             'name']; // افترض أن العمود يُدعى 'name'
+                        //         return DropdownMenuItem<String>(
+                        //           value: insectName,
+                        //           child: Text(insectName),
+                        //         );
+                        //       }).toList();
+
+                        //       return DropdownButton<String>(
+                        //         icon:
+                        //             const Icon(Icons.arrow_drop_down_outlined),
+                        //         // dropdownColor: backgroundColor,
+                        //         value: _selectedValue,
+                        //         hint: const Text(
+                        //             " اختر نوع الحشرة المنتشرة عندك "),
+                        //         items: insectItems,
+                        //         onChanged: (newValue) {
+                        //           setState(() {
+                        //             _selectedValue = newValue;
+                        //           });
+                        //         },
+                        //       );
+                        //     } else {
+                        //       // يمكنك عرض رسالة أو ويدجت آخر هنا إذا لم تكن هناك بيانات
+                        //       return const Text("لا يوجد بيانات.");
+                        //     }
+                        //   },
+                        // ),
+                        //
+
                         TextFormField(
                           // controller: phoneController,
                           keyboardType: TextInputType.name,

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
+import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 import 'package:smile_shope_dash_board/core/utils/styles.dart';
 import 'package:smile_shope_dash_board/core/widgets/row_with_icons_for_card_product_or_category.dart';
 
-class CustomAllProductWidget extends StatelessWidget {
+class CustomAllProductWidget extends StatefulWidget {
   CustomAllProductWidget({required this.product, super.key});
   Data product;
+
+  @override
+  State<CustomAllProductWidget> createState() => _CustomAllProductWidgetState();
+}
+
+class _CustomAllProductWidgetState extends State<CustomAllProductWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,9 +40,20 @@ class CustomAllProductWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: RowWithIcons(
-                        id: product.id,
+                        id: widget.product.id,
                         isShowSubCategory: true,
                         nextPageInIconDetail: '/detail_product_view',
+                        onTap: () {
+                          print('deleteeee Products');
+                          context.read<ProductCubit>().deleteProductFunction(
+                              widget.product.id.toString(), context);
+                          // buildShwoDialogDelete(context, widget.id);
+                          // setState(
+                          //   () {
+
+                          //   },
+                          // );
+                        },
                       ),
                     ),
                     const SizedBox(
@@ -47,14 +66,14 @@ class CustomAllProductWidget extends StatelessWidget {
                           flex: 2,
                         ),
                         Text(
-                          '${product.id} ',
+                          '${widget.product.id} ',
                           style: Styles.style18,
                         ),
                         const Spacer(
                           flex: 6,
                         ),
                         Text(
-                          r'$ ' '${product.productPrice}',
+                          r'$ ' '${widget.product.productPrice}',
                           style: Styles.style18,
                         ),
                         const Spacer(

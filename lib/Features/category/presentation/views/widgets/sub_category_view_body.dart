@@ -11,7 +11,6 @@ class SubGategoryViewBody extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar(
         title: 'الأصناف الفرعية',
-
       ),
       // body: Padding(
       //   padding: const EdgeInsets.all(15.0),
@@ -28,7 +27,6 @@ class SubGategoryViewBody extends StatelessWidget {
       //       itemBuilder: (context, index) => CategoryCardWidget(isButton: false,isShowSubCategory: false,isDisplayFlotaingButton: true,)
       //   ),
       // ),
-
     );
   }
 }

@@ -41,7 +41,6 @@ class _AllProductViewBodyState extends State<AllProductViewBody> {
                   if (state is DeleteSuccessState) {
                     message(context, 'تم الحذف بنجاح ');
                   }
-
                   setState(() {});
                 },
                 builder: (context, state) {

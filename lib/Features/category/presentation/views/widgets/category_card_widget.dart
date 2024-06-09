@@ -1,26 +1,32 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smile_shope_dash_board/Features/category/data/models/category_all_get_model.dart';
+
+// import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
+
 import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/row_with_icons_for_card_product_or_category.dart';
 import '../../manager/category_cubit.dart';
-import '../../../data/models/category_all_get_model.dart';
 
 class CategoryCardWidget extends StatefulWidget {
   CategoryCardWidget(
-      {required this.isButton,
+      {super.key,
+      required this.isButton,
       required this.isShowSubCategory,
       this.nextPageInIconDetail,
       required this.isDisplayFlotaingButton,
-      required this.title});
+      required this.title,
+      this.data,
+      required this.id});
   bool isButton = false;
   String? nextPageInIconDetail;
   bool isShowSubCategory = false;
   final bool isDisplayFlotaingButton;
   String title;
+  // CategoryGetAllModle dd;
+  int? id;
+  Data? data;
   @override
   State<CategoryCardWidget> createState() => _CategoryCardWidgetState();
 }
@@ -61,8 +67,9 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15)),
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15),
+                        ),
                         color: colorGrey),
                     child: const Image(
                       image: AssetImage(
@@ -81,7 +88,25 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                 height: 15,
               ),
               RowWithIcons(
+                onTap: () {
+                  print('deleteeee Category');
+                  context
+                      .read<CategoryCubit>()
+                      .deleteCategoryFunction(widget.id.toString(), context);
+                  print(widget.id);
+                  // buildShwoDialogDelete(context, widget.id);
+                  // setState(() {
+
+                  // });
+                },
+
+                //   () {
+                //
+                //   },
+                // );
+                id: widget.data?.id,
                 title: widget.title,
+                // title: '',
                 nextPageInIconDetail: widget.nextPageInIconDetail,
                 isShowSubCategory: widget.isShowSubCategory,
                 isDisplayFlotaingButton: widget.isDisplayFlotaingButton,

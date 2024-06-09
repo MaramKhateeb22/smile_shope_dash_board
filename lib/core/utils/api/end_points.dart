@@ -7,6 +7,14 @@ class EndPoints {
   static String deleteProduct(String id) {
     return "product/delete/$id";
   }
+
+  static String deleteCategory(String id) {
+    return "category/delete/$id";
+  }
+
+  static String categoryGetAllSubCategory(String id) {
+    return "category/getsubcategory/$id";
+  }
 }
 
 class ApiKey {

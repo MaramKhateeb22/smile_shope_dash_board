@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 
 import '../../Features/category/presentation/views/function/shwo_dialog_function.dart';
 
 class RowWithIcons extends StatefulWidget {
-  RowWithIcons(
-      {super.key,
-      this.nextPageInIconDetail,
-      this.isDisplayFlotaingButton = false,
-      this.isShowSubCategory = false,
-      this.title,
-      this.id});
+  RowWithIcons({
+    super.key,
+    this.nextPageInIconDetail,
+    this.isDisplayFlotaingButton = false,
+    this.isShowSubCategory = false,
+    this.title,
+    required this.id,
+    required this.onTap,
+  });
   String? nextPageInIconDetail;
   String? title;
   int? id;
   final bool isShowSubCategory;
   final bool isDisplayFlotaingButton;
-
+  final Function() onTap;
   @override
   State<RowWithIcons> createState() => _RowWithIconsState();
 }
@@ -28,6 +28,7 @@ class _RowWithIconsState extends State<RowWithIcons> {
   bool isHoveredIconEdite = false;
   bool isHoveredIconDetails = false;
   bool isHoveredIconAdd = false;
+  // final void Function() onTap;
   //  int id=widget.id;
   @override
   Widget build(BuildContext context) {
@@ -57,17 +58,11 @@ class _RowWithIconsState extends State<RowWithIcons> {
           },
           child: Container(
             child: IconButton(
-              onPressed: () {
-                print('deleteeee');
-                setState(() {
-                  context
-                      .read<ProductCubit>()
-                      .deleteProductFunction(widget.id.toString(), context);
-                  // buildShwoDialogDelete(context, widget.id);
-                });
-              },
+              onPressed:
+                  // print('del');
+                  widget.onTap,
               icon: Icon(
-                Icons.delete,
+                Icons.delete_forever,
                 size: isHoveredIconDelete ? 27 : 23,
               ),
             ),
