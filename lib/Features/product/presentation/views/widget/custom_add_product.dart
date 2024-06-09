@@ -153,7 +153,8 @@ class CustomAddProductWidget extends StatelessWidget {
                         //
 
                         TextFormField(
-                          // controller: phoneController,
+                          controller:
+                              context.read<ProductCubit>().nameController,
                           keyboardType: TextInputType.name,
                           decoration: const InputDecoration(
                             label: Text('أدخل اسم المنتج'),
@@ -169,10 +170,11 @@ class CustomAddProductWidget extends StatelessWidget {
                           height: 20,
                         ),
                         TextFormField(
-                          // controller: phoneController,
+                          controller:
+                              context.read<ProductCubit>().detailController,
                           keyboardType: TextInputType.name,
                           decoration: const InputDecoration(
-                            label: Text('أدخل اسم تفاصيل  المنتج'),
+                            label: Text('أدخل  تفاصيل  المنتج'),
                             hintText: 'تفاصيل  المنتج ',
                             prefixIcon: Icon(Icons.details),
                             border: OutlineInputBorder(),
@@ -185,7 +187,8 @@ class CustomAddProductWidget extends StatelessWidget {
                           height: 20,
                         ),
                         TextFormField(
-                          // controller: phoneController,
+                          controller:
+                              context.read<ProductCubit>().priceController,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                             label: Text('سعر  المنتج'),

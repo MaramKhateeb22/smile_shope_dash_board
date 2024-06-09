@@ -80,17 +80,16 @@ class MyApp extends StatelessWidget {
         BlocProvider<CategoryCubit>(
           create: (context) => CategoryCubit(
             CategoryRepositry(
-              api: DioConsumer(dio: Dio()),
+              api: DioConsumer(
+                dio: Dio(),
+              ),
             ),
           ),
         ),
         BlocProvider<ProductCubit>(
-          create: (context) => ProductCubit(
-            ProductRepo(
-        
-              api: DioConsumer(dio: Dio()),
-            )
-          ),
+          create: (context) => ProductCubit(ProductRepo(
+            api: DioConsumer(dio: Dio()),
+          )),
         ),
       ],
       child: MaterialApp.router(
