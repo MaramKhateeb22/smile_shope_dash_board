@@ -4,9 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:smile_shope_dash_board/core/utils/api/end_points.dart';
 
 import '../../../../core/errors/exception.dart';
-
-
-
 class CategoryRepositry {
   final ApiConsumer api;
   CategoryRepositry({required this.api});

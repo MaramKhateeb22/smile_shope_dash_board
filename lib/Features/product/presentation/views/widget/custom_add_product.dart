@@ -152,7 +152,9 @@ class CustomAddProductWidget extends StatelessWidget {
                           height: 10,
                         ),
                         MaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.read<ProductCubit>().addProduct(context);
+                          },
                           color: const Color.fromARGB(255, 236, 245, 252),
                           elevation: 5,
                           child: const Text('حفظ '),

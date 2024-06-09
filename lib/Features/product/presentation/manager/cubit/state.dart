@@ -50,3 +50,12 @@ class DeleteFailerState extends ProductState {
 
   DeleteFailerState({required this.error});
 }
+class AddProductLoadingState extends ProductState {}
+
+class AddProductSuccessState extends ProductState {}
+
+class AddProductFailerState extends ProductState {
+  final String error;
+
+  AddProductFailerState({required this.error});
+}

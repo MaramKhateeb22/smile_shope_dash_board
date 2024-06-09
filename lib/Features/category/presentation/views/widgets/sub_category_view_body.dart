@@ -13,21 +13,21 @@ class SubGategoryViewBody extends StatelessWidget {
         title: 'الأصناف الفرعية',
 
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        // child: GridView.builder(
-        //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //         crossAxisCount: 4,
-        //         childAspectRatio: 1/1.25,
-        //         crossAxisSpacing: 20,
-        //         // mainAxisExtent: 3,
-        //         mainAxisSpacing: 20
-        //
-        //
-        //     ),
-        //     itemBuilder: (context, index) => CategoryCardWidget(isButton: false,isShowSubCategory: false,isDisplayFlotaingButton: true,)
-        // ),
-      ),
+      // body: Padding(
+      //   padding: const EdgeInsets.all(15.0),
+      //   child: GridView.builder(
+      //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      //           crossAxisCount: 4,
+      //           childAspectRatio: 1/1.25,
+      //           crossAxisSpacing: 20,
+      //           // mainAxisExtent: 3,
+      //           mainAxisSpacing: 20
+      //
+      //
+      //       ),
+      //       itemBuilder: (context, index) => CategoryCardWidget(isButton: false,isShowSubCategory: false,isDisplayFlotaingButton: true,)
+      //   ),
+      // ),
 
     );
   }
