@@ -1,6 +1,7 @@
 class EndPoints {
   static String baseUrl = "https://smilestore20002000.000webhostapp.com/api/";
   static String categoryGetAll = "category/get_all";
+  static String subcategoryGetAll = "subcategory/get_all";
   static String productGetAll = "product/get_all";
   static String addProduct = "product/add";
 

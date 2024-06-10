@@ -9,6 +9,8 @@ import 'package:smile_shope_dash_board/Features/category/presentation/views/cate
 import 'package:smile_shope_dash_board/Features/product/data/repo/repo.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/views/detail_product_view.dart';
+import 'package:smile_shope_dash_board/Features/sub_category/data/repo/repo.dart';
+import 'package:smile_shope_dash_board/Features/sub_category/presentation/manager/cubit/sub_category_cubit.dart';
 
 import 'Features/category/presentation/views/homw_view.dart';
 import 'Features/category/presentation/views/sub_category_view.dart';
@@ -90,6 +92,13 @@ class MyApp extends StatelessWidget {
           create: (context) => ProductCubit(ProductRepo(
             api: DioConsumer(dio: Dio()),
           )),
+        ),
+        BlocProvider<SubCategoryCubit>(
+          create: (context) => SubCategoryCubit(
+            SubCategoryRepositry(
+              api: DioConsumer(dio: Dio()),
+            ),
+          ),
         ),
       ],
       child: MaterialApp.router(

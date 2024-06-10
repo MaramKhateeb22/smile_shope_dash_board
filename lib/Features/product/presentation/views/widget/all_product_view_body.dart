@@ -33,9 +33,8 @@ class _AllProductViewBodyState extends State<AllProductViewBody> {
             else {
               ProductGetAllModel allProduct =
                   context.read<ProductCubit>().allProduct!;
-              print(
-                  "kkkkkkkkkkkkkkkkkkkkkkkkkkkallproduct" "${allProduct.data}");
-
+              // print(
+              // "kkkkkkkkkkkkkkkkkkkkkkkkkkkallproduct" "${allProduct.data}");
               return BlocConsumer<ProductCubit, ProductState>(
                 listener: (context, state) {
                   if (state is DeleteSuccessState) {

@@ -23,18 +23,50 @@ class CategoryRepositry {
     }
   }
 
-  Future<Either<String, GetAllSubCatForOneCatModel>> categoryGetAllSubCategory(
-      String id) async {
+  Future<Either<String, List<GetAllSubCatForOneCatModel>>>
+      categoryGetAllSubCategory(String id) async {
     try {
       final response = await api.get(
         EndPoints.categoryGetAllSubCategory(id),
       );
+      if (response is List) {
+        final subCategoryList = response
+            .map((CategoryData) =>
+                GetAllSubCatForOneCatModel.fromJson(CategoryData))
+            .toList();
 
-      return Right(GetAllSubCatForOneCatModel.fromJson(response));
+        print("Category of first product is ${subCategoryList[0].title2}");
+
+        return Right(subCategoryList);
+      } else {
+        return Left('Expected a list but got ${response.runtimeType}');
+      }
+      // return Right(GetAllSubCatForOneCatModel.fromJson(response));
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     }
   }
+
+  // Future<Either<String, List<CategoryGetAllModle>>> categoryGetAll() async {
+  //   try {
+  //     final response = await api.get(
+  //       EndPoints.categoryGetAll,
+  //     );
+  //     if (response is List) {
+  //       final categoryList = response
+  //           .map((productData) => CategoryGetAllModle.fromJson(productData))
+  //           .toList();
+
+  //       print("Category of first product is ${categoryList[0].massege}");
+
+  //       return Right(categoryList);
+  //     } else {
+  //       return Left('Expected a list but got ${response.runtimeType}');
+  //     }
+  //   } on ServerException catch (e) {
+  //     return Left(e.errModel.errorMessage);
+  //   }
+  // }
 
   Future<Either<String, DeleteCategoryModel>> categoryDelete(String id) async {
     try {

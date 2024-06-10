@@ -10,7 +10,6 @@ import 'package:smile_shope_dash_board/Features/product/data/model/product_delet
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
 import 'package:smile_shope_dash_board/Features/product/data/repo/repo.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/state.dart';
-import 'package:smile_shope_dash_board/core/utils/api/end_points.dart';
 import 'package:smile_shope_dash_board/core/utils/constants.dart';
 
 class ProductCubit extends Cubit<ProductState> {
@@ -33,26 +32,18 @@ class ProductCubit extends Cubit<ProductState> {
   TextEditingController priceController = TextEditingController();
   Uint8List? imageProduct;
 
+  void setImage(String imageProduct) {
+    image = imageProduct;
+  }
 
-  // uploadImageProduct(Uint8List image)async {
+  String getImage() {
+    return image ?? '3 null';
+  }
 
-  //     Uint8List img = await pickImage(ImageSource.gallery, context);
-
-  //     image = img;
-  //     emit(SelectImageState());
-
-  // }
-void setImage(String image){
-  this.image=image;
-}
-String getImage(){
-  return image?? '3 null';
-}
   pickImage(ImageSource source, context) async {
     ImagePicker imagepicker = ImagePicker();
     XFile? file = await imagepicker.pickImage(source: source);
     if (file != null) {
-
       return await file.readAsBytes();
     } else {
       message(context, 'No Image Selected');
@@ -63,79 +54,50 @@ String getImage(){
   void selectImage(context) async {
     Uint8List img = await pickImage(ImageSource.gallery, context);
 //convert to bytes
-    String base64string =
-    base64.encode(img); //convert bytes to base64 string
-
+    String base64string = base64.encode(img); //convert bytes to base64 string
+    // setImage(base64string);
     imageProduct = img;
     emit(SelectImageState());
   }
 
+  addProduct(context) async {
+    if (formkey.currentState!.validate()) {
+      emit(AddProductLoadingState());
+      final response = await productRepo.productAdd(priceController.text,
+          detailController.text, getImage(), '1', nameController.text);
+      print('       maram +yousra= love      ' '${getImage()}');
+      response.fold((errMessage) {
+        emit(AddProductFailerState(error: errMessage));
+        message(context, errMessage);
+      }, (product) {
+        addproduct = product;
+        emit(AddProductSuccessState());
+        message(context, 'تم الإضافة بنجاح');
+        clearForm();
+      });
+    } else {
+      message(context, 'يوجد حقل فارغ');
+    }
+  }
 
+  void clearForm() {
+    nameController.clear();
+    priceController.clear();
+    detailController.clear();
+    imageProduct = null;
+    emit(ClearFormState());
+  }
 
-  // void clearForm() {
-  //   nameInsectController.clear();
-  //   adressController.clear();
-  //   spaceController.clear();
-  //   image = null;
-  //   emit(ClearFormState());
-  // }
-
-  // productSubmit() async {
-  //   emit(AddProductInitalState());
-  //   final response = await ProductRopositry.productSubmit(
-  //     name: signUpName.text,
-  //     phone: signUpPhoneNumber.text,
-  //     email: signUpEmail.text,
-  //     password: signUpPassword.text,
-  //     confirmPassword: confirmPassword.text,
-  //     profilePic: profilePic!,
-  //   );
-  //   response.fold(
-  //     (errMessage) => emit(AddProductErrorState(errMessage: errMessage)),
-  //     (signUpModel) =>
-  //         emit(AddProductSuccessState(message: signUpModel.message)),
-  //   );
-  // }
-  // productSubmit() {
-  //   try {
-  //     api.post(EndPoints.addProduct, data: {
-  //       ApiKey.product_name: nameController.text,
-  //       ApiKey.product_price: priceController.text,
-  //       ApiKey.detail: detailController.text,
-  //       // ApiKey.image1 = imageProduct,
-  //     });
-  //   } catch (e) {}
-  // }
-addProduct(context) async {
-
-    emit(AddProductLoadingState());
-    final response = await productRepo.productAdd(
-      priceController.text,detailController.text,getImage(),'1',nameController.text
-    );
-    response.fold((errMessage) {
-      emit(AddProductFailerState(error: errMessage));
-      message(context, errMessage);
-    },
-            (product) {
-      addproduct = product;
-      emit(AddProductSuccessState());
-
-      message(context, 'تم الإضافة بنجاح');
-    });
-
-
-}
   getAllProducts() async {
     emit(AllProductsLoadingState());
     final response = await productRepo.productGetAll();
-
     response.fold((errMessage) {
       emit(AllProductsFailerState(error: errMessage));
-      print('55555555555555555555555551111111111155');},
-            (product) {
+      // print('55555555555555555555555551111111111155');
+    }, (product) {
       allProduct = product;
       allProduct!.data!.sort((a, b) => a.createdAt!.compareTo(b.createdAt!));
-      print('222222222222222' "allProduct!.data![0].productName!");
+      // print('222222222222222' "allProduct!.data![0].productName!");
       emit(AllProductsSuccessState());
     });
     //         (product) {

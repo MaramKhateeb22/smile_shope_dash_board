@@ -1,17 +1,31 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/state.dart';
+import 'package:smile_shope_dash_board/core/utils/constants.dart';
 
-class CustomAddProductWidget extends StatelessWidget {
+class CustomAddProductWidget extends StatefulWidget {
   const CustomAddProductWidget({super.key});
 
   @override
+  State<CustomAddProductWidget> createState() => _CustomAddProductWidgetState();
+}
+
+class _CustomAddProductWidgetState extends State<CustomAddProductWidget> {
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProductCubit, ProductState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is AddProductSuccessState) {
+          // context.go('/all_product_view');
+          context.replace('/all_product_view');
+        }
+      },
       builder: (context, state) {
+        // SubCategoryGetAllModel allSubCategory =
+        // context.read<SubCategoryCubit>().allSubCategory!;
         return Scaffold(
           appBar: AppBar(
             title: const Text('إضافة منتج '),
@@ -21,7 +35,7 @@ class CustomAddProductWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
                 child: Form(
-                  // key: ,
+                  key: context.read<ProductCubit>().formkey,
                   child: Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
@@ -101,57 +115,35 @@ class CustomAddProductWidget extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-
-                        // FutureBuilder<dynamic>(
-                        //   future: ,
-                        //   builder: (BuildContext context,
-                        //      snapshot) {
+                        // FutureBuilder<List<SubCategoryGetAllModel>>(
+                        //   future: ApiService()
+                        //       .fetchItems(), // استدعاء الدالة لجلب البيانات
+                        //   builder: (context, snapshot) {
                         //     if (snapshot.connectionState ==
                         //         ConnectionState.waiting) {
-                        //       return const Center(
-                        //           child: CircularProgressIndicator());
-                        //     }
-                        //     if (snapshot.hasError) {
-                        //       return Center(
-                        //           child: Text('Error: ${snapshot.error}'));
-                        //     }
-                        //     if (snapshot.hasData) {
-                        //       // تحويل البيانات إلى قائمة من DropdownMenuItem
-                        //       List<DropdownMenuItem<String>> insectItems =
-                        //           snapshot.data!.docs
-                        //               .map((DocumentSnapshot document) {
-                        //         Map<String, dynamic> insectData =
-                        //             document.data()! as Map<String, dynamic>;
-                        //         String insectName = insectData[
-                        //             'name']; // افترض أن العمود يُدعى 'name'
-                        //         return DropdownMenuItem<String>(
-                        //           value: insectName,
-                        //           child: Text(insectName),
-                        //         );
-                        //       }).toList();
-
-                        //       return DropdownButton<String>(
-                        //         icon:
-                        //             const Icon(Icons.arrow_drop_down_outlined),
-                        //         // dropdownColor: backgroundColor,
-                        //         value: _selectedValue,
-                        //         hint: const Text(
-                        //             " اختر نوع الحشرة المنتشرة عندك "),
-                        //         items: insectItems,
-                        //         onChanged: (newValue) {
-                        //           setState(() {
-                        //             _selectedValue = newValue;
-                        //           });
-                        //         },
-                        //       );
+                        //       return CircularProgressIndicator(); // عرض شاشة التحميل
+                        //     } else if (snapshot.hasError) {
+                        //       return Text('حصل خطأ'); // عرض رسالة الخطأ
                         //     } else {
-                        //       // يمكنك عرض رسالة أو ويدجت آخر هنا إذا لم تكن هناك بيانات
-                        //       return const Text("لا يوجد بيانات.");
+                        //       // تم الحصول على البيانات بنجاح
+                        //       List<SubCategoryGetAllModel> items =
+                        //           snapshot.data!;
+                        //       return DropdownButton<String>(
+                        //         items: items.map<DropdownMenuItem<String>>(
+                        //             (SubCategoryGetAllModel item) {
+                        //           return DropdownMenuItem<String>(
+                        //             value: item.data[index].title2,
+                        //             child: Text(item.data[index].title2),
+                        //           );
+                        //         }).toList(),
+                        //         onChanged: (String? newValue) {
+                        //           // تحديث القيمة المختارة
+                        //         },
+                        //         hint: Text("اختر عنصر"),
+                        //       );
                         //     }
                         //   },
                         // ),
-                        //
-
                         TextFormField(
                           controller:
                               context.read<ProductCubit>().nameController,
@@ -162,6 +154,12 @@ class CustomAddProductWidget extends StatelessWidget {
                             prefixIcon: Icon(Icons.shopping_basket),
                             border: OutlineInputBorder(),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'This Field is required';
+                            }
+                            return null;
+                          },
                           onFieldSubmitted: (value) {
                             print(value);
                           },
@@ -182,6 +180,12 @@ class CustomAddProductWidget extends StatelessWidget {
                           onFieldSubmitted: (value) {
                             print(value);
                           },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'This Field is required';
+                            }
+                            return null;
+                          },
                         ),
                         const SizedBox(
                           height: 20,
@@ -199,18 +203,58 @@ class CustomAddProductWidget extends StatelessWidget {
                           onFieldSubmitted: (value) {
                             print(value);
                           },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'This Field is required';
+                            }
+                            return null;
+                          },
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        MaterialButton(
-                          onPressed: () {
-                            context.read<ProductCubit>().addProduct(context);
-                          },
-                          color: const Color.fromARGB(255, 236, 245, 252),
-                          elevation: 5,
-                          child: const Text('حفظ '),
-                        )
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            state is AddProductLoadingState
+                                ? const CircularProgressIndicator()
+                                : MaterialButton(
+                                    onPressed: () {
+                                      context
+                                          .read<ProductCubit>()
+                                          .formkey
+                                          .currentState!
+                                          .validate();
+                                      if (context
+                                              .read<ProductCubit>()
+                                              .imageProduct ==
+                                          null) {
+                                        message(
+                                            context, 'أدخل صورة المنتج أولا');
+                                      } else {
+                                        context.read<ProductCubit>().addProduct(
+                                              context,
+                                            );
+                                      }
+                                    },
+                                    color: const Color.fromARGB(
+                                        255, 236, 245, 252),
+                                    elevation: 5,
+                                    child: const Text('حفظ '),
+                                  ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            MaterialButton(
+                              onPressed: () {
+                                context.read<ProductCubit>().clearForm();
+                              },
+                              color: const Color.fromARGB(255, 236, 245, 252),
+                              elevation: 5,
+                              child: const Text('حذف '),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),

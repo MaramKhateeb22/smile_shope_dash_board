@@ -24,9 +24,8 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: FutureBuilder<dynamic>(
-          future: context
-              .read<CategoryCubit>()
-              .getAllSubCategory('1'), // الوظيفة التي تحصل على البيانات من API
+          future: context.read<CategoryCubit>().getAllSubCategoryForOneCategory(
+              '1'), // الوظيفة التي تحصل على البيانات من API
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -34,24 +33,26 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
               print(snapshot.error);
               return Center(child: Text('حدث خطأ: ${snapshot.error}'));
             } else {
-              List<GetAllSubCatForOneCatModel> allSubCategory = (context
-                      .read<CategoryCubit>()
-                      .allSubCategory! as List)
-                  .map((item) {
-                    // تحقق من أن البيانات هي في الشكل المتوقع
-                    if (item is Map<String, dynamic>) {
-                      return GetAllSubCatForOneCatModel.fromJson(item);
-                    } else {
-                      // تعامل مع الحالة التي لا تستوفي الشروط المتوقعة هنا
-                      print("البيانات ليست بالشكل المتوقع: $item");
-                      return null;
-                    }
-                  })
-                  .where(
-                      (item) => item != null) // تجنب إضافة قيم null إلى القائمة
-                  .cast<
-                      GetAllSubCatForOneCatModel>() // قم بتحويل أنواع العناصر إلى GetAllSubCatForOneCatModel
-                  .toList();
+              List<GetAllSubCatForOneCatModel> allSubCategory =
+                  context.read<CategoryCubit>().allSubCategoryForOneCategory!;
+              // List<GetAllSubCatForOneCatModel> allSubCategory = (context
+              //         .read<CategoryCubit>()
+              //         .allSubCategoryForOneCategory! as List)
+              //     .map((item) {
+              //       // تحقق من أن البيانات هي في الشكل المتوقع
+              //       if (item is Map<String, dynamic>) {
+              //         return GetAllSubCatForOneCatModel.fromJson(item);
+              //       } else {
+              //         // تعامل مع الحالة التي لا تستوفي الشروط المتوقعة هنا
+              //         print("البيانات ليست بالشكل المتوقع: $item");
+              //         return null;
+              //       }
+              //     })
+              //     .where(
+              //         (item) => item != null) // تجنب إضافة قيم null إلى القائمة
+              //     .cast<
+              //         GetAllSubCatForOneCatModel>() // قم بتحويل أنواع العناصر إلى GetAllSubCatForOneCatModel
+              //     .toList();
 
               // List<GetAllSubCatForOneCatModel> allSubCategory =
               //     (context.read<CategoryCubit>().allSubCategory! as List)

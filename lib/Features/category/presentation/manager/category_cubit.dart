@@ -14,7 +14,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   final CategoryRepositry categoryRepository;
   CategoryGetAllModle? allCategory;
   DeleteCategoryModel? deleteCategory;
-  GetAllSubCatForOneCatModel? allSubCategory;
+  List<GetAllSubCatForOneCatModel>? allSubCategoryForOneCategory;
   getAllCategory() async {
     emit(GetAllCategoryLoading());
     final response = await categoryRepository.categoryGetAll();
@@ -26,16 +26,26 @@ class CategoryCubit extends Cubit<CategoryState> {
     });
   }
 
-  getAllSubCategory(String id) async {
+  getAllSubCategoryForOneCategory(String id) async {
     emit(GetAllSubCategoryLoading());
     final response = await categoryRepository.categoryGetAllSubCategory(id);
     response.fold(
         (errMessage) => emit(CetAllSubCategoryFailure(errMessage: errMessage)),
         (Subcategory) {
-      allSubCategory = Subcategory;
+      allSubCategoryForOneCategory = Subcategory;
       emit(GetAllSubCategorySuccess());
     });
   }
+
+  // getUserProfile() async {
+  //   emit(GetUserLoading());
+  //   final response = await userRepository.getUserProfile();
+  //   response.fold((errMessage) => emit(GetUserFailure(errMessage: errMessage)),
+  //       (user) {
+  //     userProfile = user;
+  //     emit(GetUserSuccess());
+  //   });
+  // }
 
   deleteCategoryFunction(String id, context) async {
     emit(DeleteCategoryLoading());
