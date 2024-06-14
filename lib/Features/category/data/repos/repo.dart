@@ -41,7 +41,6 @@ class CategoryRepositry {
       } else {
         return Left('Expected a list but got ${response.runtimeType}');
       }
-      // return Right(GetAllSubCatForOneCatModel.fromJson(response));
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     }

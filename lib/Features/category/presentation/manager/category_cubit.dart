@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:smile_shope_dash_board/Features/category/data/models/category_all_get_Sub_Category_model.dart';
 import 'package:smile_shope_dash_board/Features/category/data/models/category_delete_model.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/manager/category_state.dart';
@@ -11,6 +12,8 @@ class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit(
     this.categoryRepository,
   ) : super(GetAllCategoryInitialState());
+  final formkey = GlobalKey<FormState>();
+  TextEditingController nameController = TextEditingController();
   final CategoryRepositry categoryRepository;
   CategoryGetAllModle? allCategory;
   DeleteCategoryModel? deleteCategory;
@@ -36,16 +39,6 @@ class CategoryCubit extends Cubit<CategoryState> {
       emit(GetAllSubCategorySuccess());
     });
   }
-
-  // getUserProfile() async {
-  //   emit(GetUserLoading());
-  //   final response = await userRepository.getUserProfile();
-  //   response.fold((errMessage) => emit(GetUserFailure(errMessage: errMessage)),
-  //       (user) {
-  //     userProfile = user;
-  //     emit(GetUserSuccess());
-  //   });
-  // }
 
   deleteCategoryFunction(String id, context) async {
     emit(DeleteCategoryLoading());

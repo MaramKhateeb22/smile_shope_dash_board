@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smile_shope_dash_board/Features/category/data/models/category_all_get_model.dart';
+import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/sub_category_view_body.dart';
 
 // import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
 
@@ -18,7 +19,8 @@ class CategoryCardWidget extends StatefulWidget {
       required this.isDisplayFlotaingButton,
       required this.title,
       this.data,
-      required this.id});
+      required this.id,
+      required this.textbutton});
   bool isButton = false;
   String? nextPageInIconDetail;
   bool isShowSubCategory = false;
@@ -27,6 +29,7 @@ class CategoryCardWidget extends StatefulWidget {
   // CategoryGetAllModle dd;
   int? id;
   Data? data;
+  String textbutton;
   @override
   State<CategoryCardWidget> createState() => _CategoryCardWidgetState();
 }
@@ -56,7 +59,6 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
       },
       child: Card(
         elevation: isHoveredCard ? 20 : 2, // تغيير ارتفاع الحاشية عند hover
-
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15), color: Colors.white),
@@ -88,6 +90,19 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                 height: 15,
               ),
               RowWithIcons(
+                onpressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SubGategoryViewBody(id: widget.id),
+                    ),
+                  );
+
+                  // context.go('${widget.nextPageInIconDetail}/${widget.id}');
+                  // context.go('${widget.nextPageInIconDetail}');
+                  print(widget.id);
+                },
+                //delelte
                 onTap: () {
                   print('deleteeee Category');
                   context
@@ -95,18 +110,9 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                       .deleteCategoryFunction(widget.id.toString(), context);
                   print(widget.id);
                   // buildShwoDialogDelete(context, widget.id);
-                  // setState(() {
-
-                  // });
                 },
-
-                //   () {
-                //
-                //   },
-                // );
                 id: widget.data?.id,
                 title: widget.title,
-                // title: '',
                 nextPageInIconDetail: widget.nextPageInIconDetail,
                 isShowSubCategory: widget.isShowSubCategory,
                 isDisplayFlotaingButton: widget.isDisplayFlotaingButton,
@@ -125,8 +131,8 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                       onPressed: () {
                         context.read<CategoryCubit>().getAllCategory();
                       },
-                      child: const Text(
-                        'اضافة قسم',
+                      child: Text(
+                        widget.textbutton,
                         style: Styles.style18,
                       ),
                     ),

@@ -12,6 +12,7 @@ class RowWithIcons extends StatefulWidget {
     this.title,
     required this.id,
     required this.onTap,
+    required this.onpressed,
   });
   String? nextPageInIconDetail;
   String? title;
@@ -19,6 +20,7 @@ class RowWithIcons extends StatefulWidget {
   final bool isShowSubCategory;
   final bool isDisplayFlotaingButton;
   final Function() onTap;
+  final Function() onpressed;
   @override
   State<RowWithIcons> createState() => _RowWithIconsState();
 }
@@ -124,9 +126,12 @@ class _RowWithIconsState extends State<RowWithIcons> {
               isHoveredIconDetails = false;
             },
             child: IconButton(
-              onPressed: () {
-                context.go('${widget.nextPageInIconDetail}');
-              },
+              onPressed: widget.onpressed,
+              // onPressed: () {
+              //   context.go('${widget.nextPageInIconDetail}');
+              //   print('Hellllllllllllllllllllllllllllllll\n');
+              //   // print(widget.id);
+              // },
               icon: Icon(Icons.arrow_circle_left_outlined,
                   size: isHoveredIconDetails ? 32 : 27),
             ),

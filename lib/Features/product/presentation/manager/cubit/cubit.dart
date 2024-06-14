@@ -60,11 +60,17 @@ class ProductCubit extends Cubit<ProductState> {
     emit(SelectImageState());
   }
 
-  addProduct(context) async {
+  void addProduct(String price, String details, String image,
+      String selectedSubCategoryId, String name, context) async {
     if (formkey.currentState!.validate()) {
       emit(AddProductLoadingState());
-      final response = await productRepo.productAdd(priceController.text,
-          detailController.text, getImage(), '1', nameController.text);
+      final response = await productRepo.productAdd(
+          priceController.text,
+          detailController.text,
+          getImage(),
+          selectedSubCategoryId,
+          // selectedSubCategoryId,
+          nameController.text);
       print('       maram +yousra= love      ' '${getImage()}');
       response.fold((errMessage) {
         emit(AddProductFailerState(error: errMessage));
@@ -100,11 +106,6 @@ class ProductCubit extends Cubit<ProductState> {
       // print('222222222222222' "allProduct!.data![0].productName!");
       emit(AllProductsSuccessState());
     });
-    //         (product) {
-    //   allProduct = product;
-    //   print('222222222222222\n' "${allProduct!.data![0].productName!}");
-    //   emit(AllProductsSuccessState());
-    // });
   }
 
 //Delete product Function
@@ -117,7 +118,6 @@ class ProductCubit extends Cubit<ProductState> {
     }, (product) {
       deleteProduct = product;
       emit(AllProductsSuccessState());
-
       message(context, 'تم الحذف بنجاح');
     });
   }

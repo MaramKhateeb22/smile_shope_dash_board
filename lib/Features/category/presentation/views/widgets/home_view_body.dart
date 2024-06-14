@@ -50,9 +50,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 ListTile(
                   title: const Text('كل الأصناف'),
                   leading: const Icon(Icons.category_outlined),
-
                   // subtitle: Text(),
-
                   onTap: () {
                     // Navigator.of(context).pushNamed(
                     //     '/category_main_all'); // إغلاق ال Drawer يدوياً
@@ -71,6 +69,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     // Navigator.of(context).pop(); // إغلاق ال Drawer يدوياً
                     setState(
                       () {
+                        // context.go('/category_main_all_body');
+                        context.go('/add_category_main_view_body');
                         _body = screens[1];
                       },
                     );

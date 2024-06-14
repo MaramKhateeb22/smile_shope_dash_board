@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/state.dart';
+import 'package:smile_shope_dash_board/Features/sub_category/presentation/manager/cubit/sub_category_cubit.dart';
+import 'package:smile_shope_dash_board/Features/sub_category/presentation/manager/cubit/sub_category_state.dart';
 import 'package:smile_shope_dash_board/core/utils/constants.dart';
 
 class CustomAddProductWidget extends StatefulWidget {
@@ -14,6 +16,16 @@ class CustomAddProductWidget extends StatefulWidget {
 }
 
 class _CustomAddProductWidgetState extends State<CustomAddProductWidget> {
+  String? selectedSubCategory;
+  Map<String, int> subcategoryTitlesAndIds = {};
+
+  @override
+  void initState() {
+    super.initState();
+    // Call the getAllSubCategory() function to fetch the data
+    context.read<SubCategoryCubit>().getAllSubCategory();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProductCubit, ProductState>(
@@ -24,8 +36,6 @@ class _CustomAddProductWidgetState extends State<CustomAddProductWidget> {
         }
       },
       builder: (context, state) {
-        // SubCategoryGetAllModel allSubCategory =
-        // context.read<SubCategoryCubit>().allSubCategory!;
         return Scaffold(
           appBar: AppBar(
             title: const Text('إضافة منتج '),
@@ -98,10 +108,7 @@ class _CustomAddProductWidgetState extends State<CustomAddProductWidget> {
                                       ],
                                     ),
                                   )
-                                :
-                                // width: 200,
-                                // height: 200,
-                                Container(
+                                : Container(
                                     // clipBehavior: Clip.antiAlias,
                                     child: Image.memory(
                                       context
@@ -115,35 +122,49 @@ class _CustomAddProductWidgetState extends State<CustomAddProductWidget> {
                         const SizedBox(
                           height: 20,
                         ),
-                        // FutureBuilder<List<SubCategoryGetAllModel>>(
-                        //   future: ApiService()
-                        //       .fetchItems(), // استدعاء الدالة لجلب البيانات
-                        //   builder: (context, snapshot) {
-                        //     if (snapshot.connectionState ==
-                        //         ConnectionState.waiting) {
-                        //       return CircularProgressIndicator(); // عرض شاشة التحميل
-                        //     } else if (snapshot.hasError) {
-                        //       return Text('حصل خطأ'); // عرض رسالة الخطأ
-                        //     } else {
-                        //       // تم الحصول على البيانات بنجاح
-                        //       List<SubCategoryGetAllModel> items =
-                        //           snapshot.data!;
-                        //       return DropdownButton<String>(
-                        //         items: items.map<DropdownMenuItem<String>>(
-                        //             (SubCategoryGetAllModel item) {
-                        //           return DropdownMenuItem<String>(
-                        //             value: item.data[index].title2,
-                        //             child: Text(item.data[index].title2),
-                        //           );
-                        //         }).toList(),
-                        //         onChanged: (String? newValue) {
-                        //           // تحديث القيمة المختارة
-                        //         },
-                        //         hint: Text("اختر عنصر"),
-                        //       );
-                        //     }
-                        //   },
-                        // ),
+                        BlocBuilder<SubCategoryCubit, SubCategoryState>(
+                          builder: (context, state) {
+                            if (state is GetAllSubCategorySuccess) {
+                              subcategoryTitlesAndIds = {
+                                for (var data
+                                    in state.allSubCategory.data ?? [])
+                                  data.title2: data.id
+                              };
+                              // final subcategoryTitles = state
+                              //         .allSubCategory.data
+                              //         ?.map((data) => data.title2)
+                              //         .toList() ??
+                              //     [];
+
+                              return DropdownButton<String>(
+                                value: selectedSubCategory,
+                                hint: const Text('Select a sub-category'),
+                                items: subcategoryTitlesAndIds.entries
+                                    .map((entry) {
+                                  return DropdownMenuItem<String>(
+                                    value: entry
+                                        .key, // العنوان هو القيمة التي توضع في القائمة
+                                    child: Text(entry.key),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedSubCategory = value;
+                                  });
+                                  print('selectedSubCategory:'
+                                      '$selectedSubCategory');
+                                  // لطباعة القيمة المختارة
+                                  print(
+                                      'selectedSubCategoryID: ${subcategoryTitlesAndIds[selectedSubCategory]}');
+                                },
+                              );
+                            } else if (state is GetAllSubCategoryFailure) {
+                              return Text('Error: ${state.errMessage}');
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
+                          },
+                        ),
                         TextFormField(
                           controller:
                               context.read<ProductCubit>().nameController,
@@ -232,9 +253,26 @@ class _CustomAddProductWidgetState extends State<CustomAddProductWidget> {
                                         message(
                                             context, 'أدخل صورة المنتج أولا');
                                       } else {
+                                        print('dddd' '$selectedSubCategory');
                                         context.read<ProductCubit>().addProduct(
-                                              context,
-                                            );
+                                            context
+                                                .read<ProductCubit>()
+                                                .priceController
+                                                .text,
+                                            context
+                                                .read<ProductCubit>()
+                                                .detailController
+                                                .text,
+                                            context
+                                                .read<ProductCubit>()
+                                                .getImage()
+                                                .toString(),
+                                            ' ${subcategoryTitlesAndIds[selectedSubCategory]}',
+                                            context
+                                                .read<ProductCubit>()
+                                                .nameController
+                                                .text,
+                                            context);
                                       }
                                     },
                                     color: const Color.fromARGB(

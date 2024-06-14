@@ -17,7 +17,7 @@ class SubCategoryCubit extends Cubit<SubCategoryState> {
         (errMessage) => emit(GetAllSubCategoryFailure(errMessage: errMessage)),
         (subcategory) {
       allSubCategory = subcategory;
-      emit(GetAllSubCategorySuccess());
+      emit(GetAllSubCategorySuccess(allSubCategory: subcategory));
     });
   }
 }

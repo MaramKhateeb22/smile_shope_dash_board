@@ -61,9 +61,11 @@ class _CategoryMainAllBodyState extends State<CategoryMainAllBody> {
                     itemBuilder: (context, index) => CategoryCardWidget(
                       id: allCategory.data![index].id,
                       isButton: true,
+                      textbutton: 'إضافة قسم',
                       isShowSubCategory: true,
                       isDisplayFlotaingButton: false,
                       nextPageInIconDetail: '/sub_category_view',
+                      // nextPageInIconDetail: '/category/getsubcategory',
                       title: allCategory.data![index].title1!,
                     ),
                   );

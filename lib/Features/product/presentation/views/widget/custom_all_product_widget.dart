@@ -40,6 +40,8 @@ class _CustomAllProductWidgetState extends State<CustomAllProductWidget> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: RowWithIcons(
+                        //to move the page
+                        onpressed: () {},
                         id: widget.product.id,
                         isShowSubCategory: true,
                         nextPageInIconDetail: '/detail_product_view',

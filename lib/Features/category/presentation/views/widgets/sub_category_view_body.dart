@@ -8,15 +8,17 @@ import '../../../../../core/widgets/custom_app_bar.dart';
 import 'category_card_widget.dart';
 
 class SubGategoryViewBody extends StatefulWidget {
-  const SubGategoryViewBody({super.key});
-
+  SubGategoryViewBody({super.key, required this.id});
+  int? id;
   @override
   State<SubGategoryViewBody> createState() => _SubGategoryViewBodyState();
 }
 
 class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
+  // داخل الصفحة الثانية، قد تتمكن من الحصول على id بهذه الطريقة (اعتمادًا على إعداد الrouter):
   @override
   Widget build(BuildContext context) {
+    // final id = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       appBar: buildAppBar(
         title: 'الأصناف الفرعية',
@@ -25,7 +27,7 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
         padding: const EdgeInsets.all(15.0),
         child: FutureBuilder<dynamic>(
           future: context.read<CategoryCubit>().getAllSubCategoryForOneCategory(
-              '1'), // الوظيفة التي تحصل على البيانات من API
+              widget.id.toString()), // الوظيفة التي تحصل على البيانات من API
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -35,37 +37,6 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
             } else {
               List<GetAllSubCatForOneCatModel> allSubCategory =
                   context.read<CategoryCubit>().allSubCategoryForOneCategory!;
-              // List<GetAllSubCatForOneCatModel> allSubCategory = (context
-              //         .read<CategoryCubit>()
-              //         .allSubCategoryForOneCategory! as List)
-              //     .map((item) {
-              //       // تحقق من أن البيانات هي في الشكل المتوقع
-              //       if (item is Map<String, dynamic>) {
-              //         return GetAllSubCatForOneCatModel.fromJson(item);
-              //       } else {
-              //         // تعامل مع الحالة التي لا تستوفي الشروط المتوقعة هنا
-              //         print("البيانات ليست بالشكل المتوقع: $item");
-              //         return null;
-              //       }
-              //     })
-              //     .where(
-              //         (item) => item != null) // تجنب إضافة قيم null إلى القائمة
-              //     .cast<
-              //         GetAllSubCatForOneCatModel>() // قم بتحويل أنواع العناصر إلى GetAllSubCatForOneCatModel
-              //     .toList();
-
-              // List<GetAllSubCatForOneCatModel> allSubCategory =
-              //     (context.read<CategoryCubit>().allSubCategory! as List)
-              //         .map((item) => GetAllSubCatForOneCatModel.fromJson(item))
-              //         .toList();
-              // List<GetAllSubCatForOneCatModel> allSubCategory = [];
-              // allSubCategory.add(context.read<CategoryCubit>().allSubCategory!);
-
-              // List<GetAllSubCatForOneCatModel> allSubCategory = [
-              //   context.read<CategoryCubit>().allSubCategory!
-              // ];
-              // print("kkkkkkkkkkkkkkkkkkkkkkkkkkkallcategory"
-              // "${allCategory.data}");
               return BlocConsumer<CategoryCubit, CategoryState>(
                 listener: (context, state) {
                   if (state is GetAllSubCategorySuccess) {
@@ -85,14 +56,18 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 20),
                     itemCount: allSubCategory.length,
-                    itemBuilder: (context, index) => CategoryCardWidget(
-                      id: allSubCategory[index].id,
-                      isButton: true,
-                      isShowSubCategory: true,
-                      isDisplayFlotaingButton: false,
-                      // nextPageInIconDetail: '/sub_category_view',
-                      title: allSubCategory[index].title2!,
-                    ),
+                    itemBuilder: (context, index) {
+                      // categoryid = allSubCategory[index].id!;
+                      return CategoryCardWidget(
+                        textbutton: 'إضافة منتج',
+                        id: allSubCategory[index].id,
+                        isButton: true,
+                        isShowSubCategory: true,
+                        isDisplayFlotaingButton: false,
+                        nextPageInIconDetail: '/sub_category_view',
+                        title: allSubCategory[index].title2!,
+                      );
+                    },
                   );
                 },
               );
@@ -100,22 +75,6 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
           },
         ),
       ),
-
-      // body: Padding(
-      //   padding: const EdgeInsets.all(15.0),
-      //   child: GridView.builder(
-      //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      //           crossAxisCount: 4,
-      //           childAspectRatio: 1/1.25,
-      //           crossAxisSpacing: 20,
-      //           // mainAxisExtent: 3,
-      //           mainAxisSpacing: 20
-      //
-      //
-      //       ),
-      //       itemBuilder: (context, index) => CategoryCardWidget(isButton: false,isShowSubCategory: false,isDisplayFlotaingButton: true,)
-      //   ),
-      // ),
     );
   }
 }

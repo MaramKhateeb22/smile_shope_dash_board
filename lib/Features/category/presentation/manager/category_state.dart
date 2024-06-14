@@ -32,3 +32,14 @@ class DeleteCategoryFailure extends CategoryState {
 
   DeleteCategoryFailure({required this.errMessage});
 }
+//add Category
+
+class AddCategoryLoading extends CategoryState {}
+
+class AddCategorySuccess extends CategoryState {}
+
+class AddCategoryFailure extends CategoryState {
+  final String errMessage;
+
+  AddCategoryFailure({required this.errMessage});
+}
