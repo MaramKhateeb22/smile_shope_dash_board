@@ -25,6 +25,7 @@ class ProductCubit extends Cubit<ProductState> {
   ProductDeleteModel? deleteProduct;
   AddPrdouctModel? addproduct;
   String? image;
+  String? base64string;
   final formkey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
@@ -54,7 +55,7 @@ class ProductCubit extends Cubit<ProductState> {
   void selectImage(context) async {
     Uint8List img = await pickImage(ImageSource.gallery, context);
 //convert to bytes
-    String base64string = base64.encode(img); //convert bytes to base64 string
+     base64string = base64.encode(img); //convert bytes to base64 string
     // setImage(base64string);
     imageProduct = img;
     emit(SelectImageState());
@@ -65,12 +66,14 @@ class ProductCubit extends Cubit<ProductState> {
     if (formkey.currentState!.validate()) {
       emit(AddProductLoadingState());
       final response = await productRepo.productAdd(
-          priceController.text,
-          detailController.text,
-          getImage(),
-          selectedSubCategoryId,
+        '5','kkk','llllllllllllllllllll','1','maram'
+          // priceController.text,
+          // detailController.text,
+          // getImage(),
           // selectedSubCategoryId,
-          nameController.text);
+          // // selectedSubCategoryId,
+          // nameController.text
+        );
       print('       maram +yousra= love      ' '${getImage()}');
       response.fold((errMessage) {
         emit(AddProductFailerState(error: errMessage));
