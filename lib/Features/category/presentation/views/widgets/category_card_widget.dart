@@ -73,6 +73,7 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                           topRight: Radius.circular(15),
                         ),
                         color: colorGrey),
+                    // child:Image.network(widget.data.)
                     child: const Image(
                       image: AssetImage(
                         'assets/images/photo1.png',

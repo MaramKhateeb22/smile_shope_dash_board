@@ -88,15 +88,17 @@ class _CustomAllProductWidgetState extends State<CustomAllProductWidget> {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             right: 0,
             left: 0,
             top: -190,
+            // NetworkImage('${product.image1}'),
             // child: Text('${product.image1}'),
+            // child: Image.network('${product.image}'),
             child: Image(
-              image: AssetImage('assets/images/photo1.png'),
-              // image: NetworkImage('${product.image1}'),
-              height: 260,
+              // image: AssetImage('assets/images/photo1.png'),
+              image: NetworkImage('${widget.product.image1}'),
+              // height: 260,
             ),
           ),
         ],
