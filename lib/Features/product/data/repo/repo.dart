@@ -26,13 +26,23 @@ class ProductRepo {
     try {
       final response = await api.post(
         EndPoints.addProduct,
-        qureyparamer:  {
-          "product_price": "$price",
-          "detail": "$detail",
-          "image1": "$image",
-          "sub_category_id": "$subCategoryId",
-          "product_name": "$productName",
-        },
+        data:
+        {
+          "product_name": "Example Product",
+          "product_price": 100,
+          "detail": "This is an example product.",
+          // لإرسال صورة، قد تحتاج إلى استخدام FormData و MultipartFile
+          "image1": "YOUR_IMAGE_DATA",
+          "sub_category_id": 1,
+        }
+        // {
+        //   "product_price": "$price",
+        //   "detail": "$detail",
+        //   "image1": "$image",
+        //   "sub_category_id": "$subCategoryId",
+        //   "product_name": "$productName",
+        // },
+
       );
       // print("The Response Is : \n \n" '$response');
       return Right(AddPrdouctModel.fromJson(response));
