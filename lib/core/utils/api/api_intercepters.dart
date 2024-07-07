@@ -6,4 +6,11 @@ class ApiIntercepter extends Interceptor {
     // options.headers[''] = 'ar';
     super.onRequest(options, handler);
   }
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    // TODO: implement onError
+    // print(err);
+
+    super.onError(err, handler);
+  }
 }

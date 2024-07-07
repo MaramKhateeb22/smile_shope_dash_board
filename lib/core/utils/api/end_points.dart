@@ -4,6 +4,7 @@ class EndPoints {
   static String subcategoryGetAll = "subcategory/get_all";
   static String productGetAll = "product/get_all";
   static String addProduct = "product/add";
+  static String addCategory = "category/add";
 
   static String deleteProduct(String id) {
     return "product/delete/$id";

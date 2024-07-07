@@ -265,8 +265,7 @@ class _CustomAddProductWidgetState extends State<CustomAddProductWidget> {
                                                 .text,
                                             context
                                                 .read<ProductCubit>()
-                                                .getImage()
-                                                .toString(),
+                                            .base64string!,
                                             ' ${subcategoryTitlesAndIds[selectedSubCategory]}',
                                             context
                                                 .read<ProductCubit>()
@@ -280,17 +279,17 @@ class _CustomAddProductWidgetState extends State<CustomAddProductWidget> {
                                     elevation: 5,
                                     child: const Text('حفظ '),
                                   ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            MaterialButton(
-                              onPressed: () {
-                                context.read<ProductCubit>().clearForm();
-                              },
-                              color: const Color.fromARGB(255, 236, 245, 252),
-                              elevation: 5,
-                              child: const Text('حذف '),
-                            ),
+                            // const SizedBox(
+                            //   width: 20,
+                            // ),
+                            // MaterialButton(
+                            //   onPressed: () {
+                            //     context.read<ProductCubit>().clearForm();
+                            //   },
+                            //   color: const Color.fromARGB(255, 236, 245, 252),
+                            //   elevation: 5,
+                            //   child: const Text('حذف '),
+                            // ),
                           ],
                         ),
                       ],

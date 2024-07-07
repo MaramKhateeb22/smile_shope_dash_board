@@ -28,12 +28,18 @@ class ProductRepo {
         EndPoints.addProduct,
         data:
         {
-          "product_name": "Example Product",
-          "product_price": 100,
-          "detail": "This is an example product.",
+          "product_name": productName,
+          "product_price": price ,
+          "detail": detail,
           // لإرسال صورة، قد تحتاج إلى استخدام FormData و MultipartFile
-          "image1": "YOUR_IMAGE_DATA",
-          "sub_category_id": 1,
+          "image1": image,
+          "sub_category_id": subCategoryId ,
+          // "product_name": "Example Product",
+          // "product_price": 200,
+          // "detail": "This is an example product.",
+          // // لإرسال صورة، قد تحتاج إلى استخدام FormData و MultipartFile
+          // "image1": "YOUR_IMAGE_DATA",
+          // "sub_category_id": 1,
         }
         // {
         //   "product_price": "$price",

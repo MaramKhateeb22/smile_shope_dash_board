@@ -70,7 +70,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     setState(
                       () {
                         // context.go('/category_main_all_body');
-                        context.go('/add_category_main_view_body');
+                        context.go('/add_category_main_view');
                         _body = screens[1];
                       },
                     );

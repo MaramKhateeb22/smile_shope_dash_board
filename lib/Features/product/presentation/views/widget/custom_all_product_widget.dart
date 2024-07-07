@@ -40,6 +40,7 @@ class _CustomAllProductWidgetState extends State<CustomAllProductWidget> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: RowWithIcons(
+                          title:widget.product.productName,
                         //to move the page
                         onpressed: () {},
                         id: widget.product.id,
@@ -91,15 +92,16 @@ class _CustomAllProductWidgetState extends State<CustomAllProductWidget> {
           Positioned(
             right: 0,
             left: 0,
-            top: -190,
+            top: -170,
             // NetworkImage('${product.image1}'),
             // child: Text('${product.image1}'),
             // child: Image.network('${product.image}'),
             child: Image(
-              // image: AssetImage('assets/images/photo1.png'),
-              image: NetworkImage('${widget.product.image1}'),
-              // height: 260,
-            ),
+              // image:NetworkImage('${widget.product.image1}'),
+              // AssetImage('assets/images/photo1.png'),
+              image: AssetImage('assets/images/photo1.png'),
+              height: 260,
+            )
           ),
         ],
       ),

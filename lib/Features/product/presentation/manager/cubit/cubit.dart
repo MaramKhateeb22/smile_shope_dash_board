@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_add_model';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_delete_modle.dart';
@@ -32,7 +33,7 @@ class ProductCubit extends Cubit<ProductState> {
   TextEditingController detailController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   Uint8List? imageProduct;
-
+  
   void setImage(String imageProduct) {
     image = imageProduct;
   }
@@ -44,8 +45,9 @@ class ProductCubit extends Cubit<ProductState> {
   pickImage(ImageSource source, context) async {
     ImagePicker imagepicker = ImagePicker();
     XFile? file = await imagepicker.pickImage(source: source);
+    // file = await imagepicker.pickImage(source: source);
     if (file != null) {
-      return await file.readAsBytes();
+      return await file!.readAsBytes();
     } else {
       message(context, 'No Image Selected');
       print('No Image Selected');
@@ -54,12 +56,22 @@ class ProductCubit extends Cubit<ProductState> {
 
   void selectImage(context) async {
     Uint8List img = await pickImage(ImageSource.gallery, context);
-//convert to bytes
-    base64string = base64.encode(img); //convert bytes to base64 string
+
+    //   final filePath = file!.path;
+    //   final compressedImage = await FlutterImageCompress.compressWithFile(
+    //     filePath,
+    //     minHeight: 800,
+    //     minWidth: 800,
+    //     quality: 40,
+    //   );
+    // base64string = base64Encode(compressedImage!.toList());
+
+
+      base64string = base64.encode(img);
     // setImage(base64string);
-    print('\n'
-        'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh $base64string'
-        '\n');
+    // print('\n'
+    //     'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh $base64string'
+    //     '\n');
     imageProduct = img;
     emit(SelectImageState());
   }
@@ -69,12 +81,12 @@ class ProductCubit extends Cubit<ProductState> {
     if (formkey.currentState!.validate()) {
       emit(AddProductLoadingState());
       final response = await productRepo.productAdd(
-          priceController.text,
-          detailController.text,
+          price,
+          details,
           base64string!,
           selectedSubCategoryId,
           // selectedSubCategoryId,
-          nameController.text);
+          name);
       print('       maram +yousra= love      ' '${getImage()}');
       response.fold((errMessage) {
         emit(AddProductFailerState(error: errMessage));

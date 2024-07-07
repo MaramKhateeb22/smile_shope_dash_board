@@ -55,4 +55,18 @@ class CategoryCubit extends Cubit<CategoryState> {
       },
     );
   }
+  adddCategoryFunction( context,String title,String image) async {
+    emit(DeleteCategoryLoading());
+    final response = await categoryRepository.addCategory(title,image);
+    response.fold(
+      (errMessage) {
+        emit(DeleteCategoryFailure(errMessage: errMessage));
+        message(context, errMessage);
+      },
+      (category) {
+        emit(DeleteCategorySuccess());
+        message(context, 'تم الاضافة بنجاح');
+      },
+    );
+  }
 }

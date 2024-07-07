@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smile_shope_dash_board/Features/category/data/repos/repo.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/manager/category_cubit.dart';
+import 'package:smile_shope_dash_board/Features/category/presentation/views/add_category_main_view.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/category_main_all.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/add_category_main_view._body.dart';
 import 'package:smile_shope_dash_board/Features/product/data/repo/repo.dart';
@@ -19,8 +21,13 @@ import 'Features/category/presentation/views/widgets/category_main_all_body.dart
 import 'Features/product/presentation/views/add_product_view.dart';
 import 'Features/product/presentation/views/all_product_view.dart';
 import 'core/utils/api/dio_consumer.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -46,9 +53,9 @@ final GoRouter _router = GoRouter(
       },
     ),
     GoRoute(
-      path: '/add_category_main_view_body',
+      path: '/add_category_main_view',
       builder: (BuildContext context, GoRouterState state) {
-        return const addCategoryMainViewBody();
+        return const addCategoryMainView();
       },
     ),
     GoRoute(
