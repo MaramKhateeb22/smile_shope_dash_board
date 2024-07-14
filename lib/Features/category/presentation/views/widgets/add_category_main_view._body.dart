@@ -45,22 +45,22 @@ class _AddCategoryMainViewBodyState extends State<AddCategoryMainViewBody> {
     });
 
     try {
-      final filePath = _image!.path;
-      final compressedImage = await FlutterImageCompress.compressWithFile(
-        filePath,
-        minHeight: 800,
-        minWidth: 800,
-        quality: 90,
-      );
-      final String base64Image = base64Encode(compressedImage!.toList());
-
+      // final filePath = _image!.path;
+      // final compressedImage = await FlutterImageCompress.compressWithFile(
+      //   filePath,
+      //   minHeight: 800,
+      //   minWidth: 800,
+      //   quality: 90,
+      // );
+      // final String base64Image = base64Encode(compressedImage!.toList());
+      //
 
       // تحويل الصورة إلى base64
       //
-      // final bytes =
-      //
-      // await _image!.readAsBytes();
-      // final String base64Image = base64Encode(bytes);
+      final bytes =
+
+      await _image!.readAsBytes();
+      final String base64Image = base64Encode(bytes);
 
       // إعداد البيانات لإرسالها إلى الـ API
       final String title = _textController.text;
@@ -70,23 +70,29 @@ class _AddCategoryMainViewBodyState extends State<AddCategoryMainViewBody> {
       print(' t tnull');
       }
 
-      if (compressedImage == null) {
-        print('imag tnull');
-      }
+      // if (compressedImage == null) {
+      //   print('imag tnull');
+      // }
       final Map<String, dynamic> data = {
         'title1': title,
         'image': base64Image,
+        
 
       };
-
+      const String username = '11184828';
+      const String password = '60-dayfreetrial';
       // التأكد من أن البيانات التي نرسلها صحيحة
       print('Data being sent to the API: $data');
 
       // إرسال البيانات إلى الـ API
-      const String apiUrl = 'http://yomnabaksmawi-001-site1.ltempurl.com';
+      const String apiUrl = 'http://yomnabaksmawi-001-site1.ltempurl.com/api/category/add';
       final response = await http.post(
         Uri.parse(apiUrl),
-        headers: {'Content-Type': 'application/json'},
+        // headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + base64Encode(utf8.encode('$username:$password')),
+        },
         body:
         jsonEncode(data),
       );

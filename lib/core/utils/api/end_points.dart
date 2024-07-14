@@ -1,5 +1,5 @@
 class EndPoints {
-  static String baseUrl = "https://smilestore20002000.000webhostapp.com/api/";
+  static String baseUrl = "http://yomnabaksmawi-001-site1.ltempurl.com/api/";
   static String categoryGetAll = "category/get_all";
   static String subcategoryGetAll = "subcategory/get_all";
   static String productGetAll = "product/get_all";

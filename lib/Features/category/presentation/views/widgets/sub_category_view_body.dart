@@ -33,9 +33,9 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               print(snapshot.error);
-              return Center(child: Text('حدث خطأ: ${snapshot.error}'));
+              return Center(child: Text('هذا القسم لايحوي أصناف فرعية : ${snapshot.error}'));
             } else {
-              List<GetAllSubCatForOneCatModel> allSubCategory =
+              GetAllSubCatForOneCatModel allSubCategory =
                   context.read<CategoryCubit>().allSubCategoryForOneCategory!;
               return BlocConsumer<CategoryCubit, CategoryState>(
                 listener: (context, state) {
@@ -55,17 +55,18 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
                         childAspectRatio: 1 / 1.45,
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 20),
-                    itemCount: allSubCategory.length,
+                    itemCount: allSubCategory.data!.length,
                     itemBuilder: (context, index) {
                       // categoryid = allSubCategory[index].id!;
                       return CategoryCardWidget(
                         textbutton: 'إضافة منتج',
-                        id: allSubCategory[index].id,
+                        id: allSubCategory.data![index].id,
                         isButton: true,
                         isShowSubCategory: true,
                         isDisplayFlotaingButton: false,
                         nextPageInIconDetail: '/sub_category_view',
-                        title: allSubCategory[index].title2!,
+                        title: allSubCategory.data![index].title2!,
+                        image: allSubCategory.data![index].image2!,
                       );
                     },
                   );

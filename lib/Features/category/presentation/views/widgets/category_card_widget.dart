@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smile_shope_dash_board/Features/category/data/models/category_all_get_model.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/sub_category_view_body.dart';
 
@@ -9,6 +11,7 @@ import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/row_with_icons_for_card_product_or_category.dart';
 import '../../manager/category_cubit.dart';
+import 'auth_network_image.dart';
 
 class CategoryCardWidget extends StatefulWidget {
   CategoryCardWidget(
@@ -19,6 +22,7 @@ class CategoryCardWidget extends StatefulWidget {
       required this.isDisplayFlotaingButton,
       required this.title,
       this.data,
+      required this.image,
       required this.id,
       required this.textbutton});
   bool isButton = false;
@@ -26,6 +30,7 @@ class CategoryCardWidget extends StatefulWidget {
   bool isShowSubCategory = false;
   final bool isDisplayFlotaingButton;
   String title;
+  String image;
   // CategoryGetAllModle dd;
   int? id;
   Data? data;
@@ -67,6 +72,7 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
               Stack(
                 children: [
                   Container(
+                    height: 300,
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(15),
@@ -74,11 +80,17 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                         ),
                         color: colorGrey),
                     // child:Image.network(widget.data.)
-                    child: const Image(
-                      image: AssetImage(
-                        'assets/images/photo1.png',
-                      ),
-                    ),
+                    child: ImageWithAuth(
+            imageUrl:  widget.image,
+            username: '11184828',
+            password: '60-dayfreetrial',
+          ),
+                    // child:  Image(
+                    //   image: NetworkImage(
+                    // widget.image,
+                    //   ),
+                    //   fit: BoxFit.cover,
+                    // ),
                   ),
                   Positioned(
                     child: Container(
@@ -130,7 +142,12 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                           backgroundColor:
                               MaterialStateProperty.all(colorGrey)),
                       onPressed: () {
-                        context.read<CategoryCubit>().getAllCategory();
+                        // context.read<CategoryCubit>().getAllCategory();
+                         context.goNamed("add_sub_category_view",
+                        pathParameters: {
+                          'category_id': widget.id.toString(),
+                         
+                        });
                       },
                       child: Text(
                         widget.textbutton,

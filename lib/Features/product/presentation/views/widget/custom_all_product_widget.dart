@@ -5,6 +5,8 @@ import 'package:smile_shope_dash_board/Features/product/presentation/manager/cub
 import 'package:smile_shope_dash_board/core/utils/styles.dart';
 import 'package:smile_shope_dash_board/core/widgets/row_with_icons_for_card_product_or_category.dart';
 
+import '../../../../category/presentation/views/widgets/auth_network_image.dart';
+
 class CustomAllProductWidget extends StatefulWidget {
   CustomAllProductWidget({required this.product, super.key});
   Data product;
@@ -92,16 +94,25 @@ class _CustomAllProductWidgetState extends State<CustomAllProductWidget> {
           Positioned(
             right: 0,
             left: 0,
-            top: -170,
+            top: -130,
             // NetworkImage('${product.image1}'),
             // child: Text('${product.image1}'),
             // child: Image.network('${product.image}'),
-            child: Image(
-              // image:NetworkImage('${widget.product.image1}'),
-              // AssetImage('assets/images/photo1.png'),
-              image: AssetImage('assets/images/photo1.png'),
-              height: 260,
-            )
+            child: Container(
+              height: 200,
+              width: 200,
+              child: ImageWithAuth(
+              imageUrl:  widget.product.image1!,
+              username: '11184828',
+              password: '60-dayfreetrial',
+                        ),
+            ),
+            // Image(
+            //   // image:NetworkImage('${widget.product.image1}'),
+            //   // AssetImage('assets/images/photo1.png'),
+            //   image: AssetImage(),
+            //   height: 260,
+            // )
           ),
         ],
       ),

@@ -67,6 +67,7 @@ class _CategoryMainAllBodyState extends State<CategoryMainAllBody> {
                       nextPageInIconDetail: '/sub_category_view',
                       // nextPageInIconDetail: '/category/getsubcategory',
                       title: allCategory.data![index].title1!,
+                      image: allCategory.data![index].image!,
                     ),
                   );
                 },

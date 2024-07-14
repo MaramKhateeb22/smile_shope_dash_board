@@ -9,6 +9,7 @@ import 'package:smile_shope_dash_board/Features/category/presentation/manager/ca
 import 'package:smile_shope_dash_board/Features/category/presentation/views/add_category_main_view.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/category_main_all.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/add_category_main_view._body.dart';
+import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/add_sub_category_view.dart';
 import 'package:smile_shope_dash_board/Features/product/data/repo/repo.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/views/detail_product_view.dart';
@@ -80,6 +81,13 @@ final GoRouter _router = GoRouter(
       path: '/detail_product_view',
       builder: (BuildContext context, GoRouterState state) {
         return const DetailProductView();
+      },
+    ),
+    GoRoute(
+      path: '/add_sub_category_view/:category_id',
+      name: 'add_sub_category_view',
+      builder: (BuildContext context, GoRouterState state) {
+        return  AddSubCategoryView(categoryId: state.pathParameters['category_id']!,);
       },
     ),
   ],
