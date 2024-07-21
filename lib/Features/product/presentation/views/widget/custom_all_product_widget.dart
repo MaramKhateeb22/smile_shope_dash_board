@@ -5,6 +5,7 @@ import 'package:smile_shope_dash_board/Features/product/presentation/manager/cub
 import 'package:smile_shope_dash_board/core/utils/styles.dart';
 import 'package:smile_shope_dash_board/core/widgets/row_with_icons_for_card_product_or_category.dart';
 
+import '../../../../category/presentation/views/function/shwo_dialog_delete_func.dart';
 import '../../../../category/presentation/views/widgets/auth_network_image.dart';
 
 class CustomAllProductWidget extends StatefulWidget {
@@ -53,11 +54,11 @@ class _CustomAllProductWidgetState extends State<CustomAllProductWidget> {
                           context.read<ProductCubit>().deleteProductFunction(
                               widget.product.id.toString(), context);
                           // buildShwoDialogDelete(context, widget.id);
-                          // setState(
-                          //   () {
+                          setState(
+                            () {
 
-                          //   },
-                          // );
+                            },
+                          );
                         },
                       ),
                     ),
