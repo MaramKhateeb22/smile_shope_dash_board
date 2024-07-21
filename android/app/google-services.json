@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "826615894999",
+    "project_id": "smile-shope",
+    "storage_bucket": "smile-shope.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826615894999:android:4a998b764e3c74dd4f3192",
+        "android_client_info": {
+          "package_name": "com.example.smile_shope_dash_board"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJapZHzTTdmz32StUle80mX5B-6ilOkjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
