@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/auth_network_image.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 import 'package:smile_shope_dash_board/core/utils/styles.dart';
 import 'package:smile_shope_dash_board/core/widgets/row_with_icons_for_card_product_or_category.dart';
 
 import '../../../../category/presentation/views/function/shwo_dialog_delete_func.dart';
-import '../../../../category/presentation/views/widgets/auth_network_image.dart';
+// import '../../../../category/presentation/views/widgets/auth_network_image.dart';
 
 class CustomAllProductWidget extends StatefulWidget {
   CustomAllProductWidget({required this.product, super.key});
@@ -43,7 +44,7 @@ class _CustomAllProductWidgetState extends State<CustomAllProductWidget> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: RowWithIcons(
-                          title:widget.product.productName,
+                        title: widget.product.productName,
                         //to move the page
                         onpressed: () {},
                         id: widget.product.id,
@@ -55,9 +56,7 @@ class _CustomAllProductWidgetState extends State<CustomAllProductWidget> {
                               widget.product.id.toString(), context);
                           // buildShwoDialogDelete(context, widget.id);
                           setState(
-                            () {
-
-                            },
+                            () {},
                           );
                         },
                       ),
@@ -99,14 +98,14 @@ class _CustomAllProductWidgetState extends State<CustomAllProductWidget> {
             // NetworkImage('${product.image1}'),
             // child: Text('${product.image1}'),
             // child: Image.network('${product.image}'),
-            child: Container(
+            child: SizedBox(
               height: 200,
               width: 200,
               child: ImageWithAuth(
-              imageUrl:  widget.product.image1!,
-              username: '11184828',
-              password: '60-dayfreetrial',
-                        ),
+                imageUrl: widget.product.image1!,
+                username: '11184828',
+                password: '60-dayfreetrial',
+              ),
             ),
             // Image(
             //   // image:NetworkImage('${widget.product.image1}'),

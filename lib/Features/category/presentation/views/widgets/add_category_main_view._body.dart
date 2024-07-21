@@ -1,22 +1,22 @@
-
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart'; // لتحديد إذا كنا نعمل على الويب
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/manager/category_cubit.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/manager/category_state.dart';
+import 'package:smile_shope_dash_board/core/utils/constants.dart';
 
 class AddCategoryMainViewBody extends StatefulWidget {
   const AddCategoryMainViewBody({super.key});
 
   @override
-  State<AddCategoryMainViewBody> createState() => _AddCategoryMainViewBodyState();
+  State<AddCategoryMainViewBody> createState() =>
+      _AddCategoryMainViewBodyState();
 }
 
 class _AddCategoryMainViewBodyState extends State<AddCategoryMainViewBody> {
@@ -57,17 +57,14 @@ class _AddCategoryMainViewBodyState extends State<AddCategoryMainViewBody> {
 
       // تحويل الصورة إلى base64
       //
-      final bytes =
-
-      await _image!.readAsBytes();
+      final bytes = await _image!.readAsBytes();
       final String base64Image = base64Encode(bytes);
 
       // إعداد البيانات لإرسالها إلى الـ API
       final String title = _textController.text;
 
-
       if (title.isEmpty) {
-      print(' t tnull');
+        print(' t tnull');
       }
 
       // if (compressedImage == null) {
@@ -76,8 +73,6 @@ class _AddCategoryMainViewBodyState extends State<AddCategoryMainViewBody> {
       final Map<String, dynamic> data = {
         'title1': title,
         'image': base64Image,
-        
-
       };
       const String username = '11184828';
       const String password = '60-dayfreetrial';
@@ -85,16 +80,17 @@ class _AddCategoryMainViewBodyState extends State<AddCategoryMainViewBody> {
       print('Data being sent to the API: $data');
 
       // إرسال البيانات إلى الـ API
-      const String apiUrl = 'http://yomnabaksmawi-001-site1.ltempurl.com/api/category/add';
+      const String apiUrl =
+          'http://yomnabaksmawi-001-site1.ltempurl.com/api/category/add';
       final response = await http.post(
         Uri.parse(apiUrl),
         // headers: {'Content-Type': 'application/json'},
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Basic ' + base64Encode(utf8.encode('$username:$password')),
+          'Authorization':
+              'Basic ${base64Encode(utf8.encode('$username:$password'))}',
         },
-        body:
-        jsonEncode(data),
+        body: jsonEncode(data),
       );
 
       setState(() {
@@ -103,7 +99,8 @@ class _AddCategoryMainViewBodyState extends State<AddCategoryMainViewBody> {
             ? 'Upload Successful!'
             : 'Upload Failed: ${response.body}';
       });
-
+      message(context, 'تم إضافة الصنف بنجاح');
+      context.replace('/category_main_all');
       // طباعة الرد من الخادم لتحليل الأخطاء
       print('API Response: ${response.body}');
     } catch (e) {
@@ -144,39 +141,42 @@ class _AddCategoryMainViewBodyState extends State<AddCategoryMainViewBody> {
                         if (_image != null)
                           kIsWeb
                               ? FutureBuilder(
-                            future: _image!.readAsBytes(),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.done) {
-                                if (snapshot.hasError) {
-                                  return const Text("Error loading image");
-                                }
-                                final bytes = snapshot.data as Uint8List;
-                                return Image.memory(bytes);
-                              } else {
-                                return const CircularProgressIndicator();
-                              }
-                            },
-                          )
+                                  future: _image!.readAsBytes(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      if (snapshot.hasError) {
+                                        return const Text(
+                                            "Error loading image");
+                                      }
+                                      final bytes = snapshot.data as Uint8List;
+                                      return Image.memory(bytes);
+                                    } else {
+                                      return const CircularProgressIndicator();
+                                    }
+                                  },
+                                )
                               : Image.file(File(_image!.path)),
                         const SizedBox(height: 16.0),
                         TextField(
                           controller: _textController,
                           decoration: const InputDecoration(
-                            labelText: 'Enter text',
+                            labelText: 'أدخل اسم الصنف',
                           ),
                         ),
                         const SizedBox(height: 16.0),
                         ElevatedButton(
                           onPressed: _pickImage,
-                          child: const Text('Pick Image'),
+                          child: const Text(' اختيار صورة'),
                         ),
                         const SizedBox(height: 16.0),
                         ElevatedButton(
-                          onPressed: ()async{
+                          onPressed: () async {
                             _uploadImage();
-
                           },
-                          child: _isLoading ? const CircularProgressIndicator() : const Text('Upload'),
+                          child: _isLoading
+                              ? const CircularProgressIndicator()
+                              : const Text('رفع '),
                         ),
                         if (_response != null) ...[
                           const SizedBox(height: 16.0),
@@ -195,12 +195,7 @@ class _AddCategoryMainViewBodyState extends State<AddCategoryMainViewBody> {
   }
 }
 
-
-
-
-
 //
-
 
 //
 //

@@ -21,7 +21,7 @@ class _CategoryMainAllBodyState extends State<CategoryMainAllBody> {
       backgroundColor: const Color.fromARGB(249, 249, 249, 249),
       appBar: buildAppBar(
         title: 'الأصناف',
-        isActionAdd: true,
+        // isActionAdd: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),

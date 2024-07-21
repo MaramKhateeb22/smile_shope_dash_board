@@ -33,7 +33,7 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               print(snapshot.error);
-              return Center(child: Text('هذا القسم لايحوي أصناف فرعية : ${snapshot.error}'));
+              return Center(child: Text('يوجد خطأ: ${snapshot.error}'));
             } else {
               List<GetAllSubCatForOneCatModel?> allSubCategory =
                   context.read<CategoryCubit>().allSubCategoryForOneCategory!;

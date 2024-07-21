@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smile_shope_dash_board/Features/category/data/models/category_all_get_model.dart';
@@ -73,6 +72,7 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                 children: [
                   Container(
                     height: 300,
+                    clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(15),
@@ -81,10 +81,10 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                         color: colorGrey),
                     // child:Image.network(widget.data.)
                     child: ImageWithAuth(
-            imageUrl:  widget.image,
-            username: '11184828',
-            password: '60-dayfreetrial',
-          ),
+                      imageUrl: widget.image,
+                      username: '11184828',
+                      password: '60-dayfreetrial',
+                    ),
                     // child:  Image(
                     //   image: NetworkImage(
                     // widget.image,
@@ -143,11 +143,12 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                               MaterialStateProperty.all(colorGrey)),
                       onPressed: () {
                         // context.read<CategoryCubit>().getAllCategory();
-                         context.goNamed("add_sub_category_view",
-                        pathParameters: {
-                          'category_id': widget.id.toString(),
-                         
-                        });
+                        context.goNamed(
+                          "add_sub_category_view",
+                          pathParameters: {
+                            'category_id': widget.id.toString(),
+                          },
+                        );
                       },
                       child: Text(
                         widget.textbutton,

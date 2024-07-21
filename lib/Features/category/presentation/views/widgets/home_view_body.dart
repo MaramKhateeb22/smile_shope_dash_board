@@ -67,13 +67,13 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   leading: const Icon(Icons.category_outlined),
                   onTap: () {
                     // Navigator.of(context).pop(); // إغلاق ال Drawer يدوياً
-                    setState(
-                      () {
-                        // context.go('/category_main_all_body');
-                        context.go('/add_category_main_view');
-                        _body = screens[1];
-                      },
-                    );
+                    // setState(
+                    // () {
+                    // context.go('/category_main_all_body');
+                    context.go('/add_category_main_view');
+                    _body = screens[1];
+                    // },
+                    // );
                   },
                 ),
               ],
@@ -98,12 +98,13 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 ),
                 ListTile(
                   onTap: () {
-                    setState(
-                      () {
-                        context.go('/add_product_view');
-                        _body = screens[3];
-                      },
-                    );
+                    // setState(
+                    // () {
+
+                    // },
+                    context.go('/add_product_view');
+                    _body = screens[3];
+                    // );
                   },
                   title: const Text('إضافة منتج'),
                   leading: const Icon(Icons.add_circle_outline),

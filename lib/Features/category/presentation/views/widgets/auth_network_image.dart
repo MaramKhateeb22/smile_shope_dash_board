@@ -1,13 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 class ImageWithAuth extends StatefulWidget {
   final String imageUrl;
   final String username;
   final String password;
 
-  ImageWithAuth({required this.imageUrl, required this.username, required this.password});
+  const ImageWithAuth(
+      {super.key,
+      required this.imageUrl,
+      required this.username,
+      required this.password});
 
   @override
   _ImageWithAuthState createState() => _ImageWithAuthState();
@@ -21,20 +27,23 @@ class _ImageWithAuthState extends State<ImageWithAuth> {
     super.initState();
     _imageData = fetchImage(widget.imageUrl, widget.username, widget.password);
   }
-Future<Uint8List> fetchImage(String url, String username, String password) async {
-  final response = await http.get(
-    Uri.parse(url),
-    headers: {
-      'Authorization': 'Basic ${base64Encode(utf8.encode('$username:$password'))}',
-    },
-  );
 
-  if (response.statusCode == 200) {
-    return response.bodyBytes;
-  } else {
-    throw Exception('Failed to load image');
+  Future<Uint8List> fetchImage(
+      String url, String username, String password) async {
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {
+        'Authorization':
+            'Basic ${base64Encode(utf8.encode('$username:$password'))}',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return response.bodyBytes;
+    } else {
+      throw Exception('Failed to load image');
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +51,16 @@ Future<Uint8List> fetchImage(String url, String username, String password) async
       future: _imageData,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
-          return Image.memory(
-            snapshot.data!,
-            fit: BoxFit.fill,
+          return Center(
+            child: Image.memory(
+              snapshot.data!,
+              fit: BoxFit.cover,
+              // color: Colors.amber,
+            ),
           );
         }
       },

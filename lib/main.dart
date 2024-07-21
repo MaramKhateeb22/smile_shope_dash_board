@@ -15,20 +15,14 @@ import 'package:smile_shope_dash_board/Features/product/presentation/manager/cub
 import 'package:smile_shope_dash_board/Features/product/presentation/views/detail_product_view.dart';
 import 'package:smile_shope_dash_board/Features/sub_category/data/repo/repo.dart';
 import 'package:smile_shope_dash_board/Features/sub_category/presentation/manager/cubit/sub_category_cubit.dart';
-
 import 'Features/category/presentation/views/homw_view.dart';
 import 'Features/category/presentation/views/sub_category_view.dart';
 import 'Features/category/presentation/views/widgets/category_main_all_body.dart';
 import 'Features/product/presentation/views/add_product_view.dart';
 import 'Features/product/presentation/views/all_product_view.dart';
 import 'core/utils/api/dio_consumer.dart';
-import 'firebase_options.dart';
 
-void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+void main() async {
   runApp(const MyApp());
 }
 
@@ -87,7 +81,9 @@ final GoRouter _router = GoRouter(
       path: '/add_sub_category_view/:category_id',
       name: 'add_sub_category_view',
       builder: (BuildContext context, GoRouterState state) {
-        return  AddSubCategoryView(categoryId: state.pathParameters['category_id']!,);
+        return AddSubCategoryView(
+          categoryId: state.pathParameters['category_id']!,
+        );
       },
     ),
   ],
