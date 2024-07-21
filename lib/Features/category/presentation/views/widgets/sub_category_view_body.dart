@@ -35,7 +35,7 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
               print(snapshot.error);
               return Center(child: Text('هذا القسم لايحوي أصناف فرعية : ${snapshot.error}'));
             } else {
-              GetAllSubCatForOneCatModel allSubCategory =
+              List<GetAllSubCatForOneCatModel?> allSubCategory =
                   context.read<CategoryCubit>().allSubCategoryForOneCategory!;
               return BlocConsumer<CategoryCubit, CategoryState>(
                 listener: (context, state) {
@@ -55,18 +55,18 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
                         childAspectRatio: 1 / 1.45,
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 20),
-                    itemCount: allSubCategory.data!.length,
+                    itemCount: allSubCategory.length,
                     itemBuilder: (context, index) {
                       // categoryid = allSubCategory[index].id!;
                       return CategoryCardWidget(
                         textbutton: 'إضافة منتج',
-                        id: allSubCategory.data![index].id,
+                        id: allSubCategory[index]!.id!,
                         isButton: true,
                         isShowSubCategory: true,
                         isDisplayFlotaingButton: false,
                         nextPageInIconDetail: '/sub_category_view',
-                        title: allSubCategory.data![index].title2!,
-                        image: allSubCategory.data![index].image2!,
+                        title: allSubCategory[index]!.title2!,
+                        image: allSubCategory[index]!.image2!,
                       );
                     },
                   );
