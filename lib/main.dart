@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,13 +7,14 @@ import 'package:smile_shope_dash_board/Features/category/data/repos/repo.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/manager/category_cubit.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/add_category_main_view.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/category_main_all.dart';
-import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/add_category_main_view._body.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/add_sub_category_view.dart';
+import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
 import 'package:smile_shope_dash_board/Features/product/data/repo/repo.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/views/detail_product_view.dart';
 import 'package:smile_shope_dash_board/Features/sub_category/data/repo/repo.dart';
 import 'package:smile_shope_dash_board/Features/sub_category/presentation/manager/cubit/sub_category_cubit.dart';
+
 import 'Features/category/presentation/views/homw_view.dart';
 import 'Features/category/presentation/views/sub_category_view.dart';
 import 'Features/category/presentation/views/widgets/category_main_all_body.dart';
@@ -26,6 +26,7 @@ void main() async {
   runApp(const MyApp());
 }
 
+int? id;
 final GoRouter _router = GoRouter(
   initialLocation: '/home',
   routes: <RouteBase>[
@@ -71,10 +72,23 @@ final GoRouter _router = GoRouter(
         return const AllProductView();
       },
     ),
+    // GoRoute(
+    //   path: '/detail_product_view/:product_id',
+    //   name: 'detail_product_view',
+    //   builder: (BuildContext context, GoRouterState state) {
+    //     final productId = state.getParam(pathParameter: 'product_id');
+    //     return DetailProductView(id: int.parse(productId));
+    //   },
+    // ),
+
     GoRoute(
       path: '/detail_product_view',
+      name: 'detail_product_view',
       builder: (BuildContext context, GoRouterState state) {
-        return const DetailProductView();
+        Data product = state.extra as Data;
+        return DetailProductView(
+          product: product,
+        );
       },
     ),
     GoRoute(

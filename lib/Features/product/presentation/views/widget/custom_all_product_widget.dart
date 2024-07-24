@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/auth_network_image.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 import 'package:smile_shope_dash_board/core/utils/styles.dart';
 import 'package:smile_shope_dash_board/core/widgets/row_with_icons_for_card_product_or_category.dart';
-
-import '../../../../category/presentation/views/function/shwo_dialog_delete_func.dart';
 // import '../../../../category/presentation/views/widgets/auth_network_image.dart';
 
 class CustomAllProductWidget extends StatefulWidget {
@@ -46,7 +45,21 @@ class _CustomAllProductWidgetState extends State<CustomAllProductWidget> {
                       child: RowWithIcons(
                         title: widget.product.productName,
                         //to move the page
-                        onpressed: () {},
+                        onpressed: () {
+                          // context.goNamed(
+                          //   "/detail_product_view",
+                          //   queryParams: {
+                          //     'product_id': widget.product.id.toString(),
+                          //   },
+                          // );
+                          context.goNamed(
+                            "detail_product_view",
+                            extra: widget.product,
+                          );
+                          // context.go('/detail_product_view');
+                          // context
+                          // .go('/detail_product_view/${widget.product.id}');
+                        },
                         id: widget.product.id,
                         isShowSubCategory: true,
                         nextPageInIconDetail: '/detail_product_view',
