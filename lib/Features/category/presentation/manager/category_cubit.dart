@@ -70,4 +70,21 @@ class CategoryCubit extends Cubit<CategoryState> {
       },
     );
   }
+
+  editCategoryFunction(context, String id,
+      {String? title, String? image}) async {
+    emit(EditCategoryLoading());
+    final response = await categoryRepository.editCategoryTitle(
+        id: id, title: title, image: image);
+    response.fold(
+      (errMessage) {
+        emit(EditCategoryFailure(errMessage: errMessage));
+        message(context, errMessage);
+      },
+      (category) {
+        emit(EditCategorySuccess());
+        message(context, 'تم التعديل بنجاح');
+      },
+    );
+  }
 }

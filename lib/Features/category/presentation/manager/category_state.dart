@@ -43,3 +43,14 @@ class AddCategoryFailure extends CategoryState {
 
   AddCategoryFailure({required this.errMessage});
 }
+//edit Category
+
+class EditCategoryLoading extends CategoryState {}
+
+class EditCategorySuccess extends CategoryState {}
+
+class EditCategoryFailure extends CategoryState {
+  final String errMessage;
+
+  EditCategoryFailure({required this.errMessage});
+}

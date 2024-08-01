@@ -103,6 +103,7 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                 height: 15,
               ),
               RowWithIcons(
+                image: widget.image,
                 onpressed: () {
                   Navigator.push(
                     context,

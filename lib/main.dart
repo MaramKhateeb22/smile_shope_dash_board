@@ -7,6 +7,7 @@ import 'package:smile_shope_dash_board/Features/category/data/repos/repo.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/manager/category_cubit.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/add_category_main_view.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/category_main_all.dart';
+import 'package:smile_shope_dash_board/Features/category/presentation/views/function/edit_category_title.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/add_sub_category_view.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
 import 'package:smile_shope_dash_board/Features/product/data/repo/repo.dart';
@@ -26,7 +27,7 @@ void main() async {
   runApp(const MyApp());
 }
 
-int? id;
+// int? id;
 final GoRouter _router = GoRouter(
   initialLocation: '/home',
   routes: <RouteBase>[
@@ -97,6 +98,18 @@ final GoRouter _router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return AddSubCategoryView(
           categoryId: state.pathParameters['category_id']!,
+        );
+      },
+    ),
+    GoRoute(
+      path:
+          '/edit_category_main_view_body/:category_id/:category_image/:category_title',
+      name: 'edit_category_main_view_body',
+      builder: (BuildContext context, GoRouterState state) {
+        return EditCategoryMainViewBody(
+          id: state.pathParameters['category_id']!,
+          image: state.pathParameters['category_image']!,
+          title: state.pathParameters['category_title']!,
         );
       },
     ),

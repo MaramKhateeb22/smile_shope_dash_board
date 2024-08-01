@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../Features/category/presentation/views/function/shwo_dialog_function.dart';
-
 class RowWithIcons extends StatefulWidget {
-  RowWithIcons({
-    super.key,
-    this.nextPageInIconDetail,
-    this.isDisplayFlotaingButton = false,
-    this.isShowSubCategory = false,
-    this.title,
-    required this.id,
-    required this.onTap,
-    required this.onpressed,
-  });
+  RowWithIcons(
+      {super.key,
+      this.nextPageInIconDetail,
+      this.isDisplayFlotaingButton = false,
+      this.isShowSubCategory = false,
+      this.title,
+      required this.id,
+      required this.onTap,
+      required this.onpressed,
+      this.image});
   String? nextPageInIconDetail;
   String? title;
   int? id;
+  String? image;
   final bool isShowSubCategory;
   final bool isDisplayFlotaingButton;
   final Function() onTap;
@@ -86,7 +85,16 @@ class _RowWithIconsState extends State<RowWithIcons> {
           },
           child: IconButton(
             onPressed: () {
-              buildShwoDialogEdit(context);
+              context.goNamed(
+                'edit_category_main_view_body',
+                pathParameters: {
+                  'category_id': widget.title!,
+                  'category_image': widget.image!,
+                  'category_title': widget.title!,
+                },
+              );
+              // buildShwoDialogEdit(
+              // context, widget.id.toString(), widget.image!, widget.title!);
             },
             icon: Icon(
               Icons.edit,

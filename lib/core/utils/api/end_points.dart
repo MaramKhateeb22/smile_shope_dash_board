@@ -17,6 +17,10 @@ class EndPoints {
   static String categoryGetAllSubCategory(String id) {
     return "category/getsubcategory/$id";
   }
+
+  static String editCategoryTitle(String id) {
+    return "category/update/$id";
+  }
 }
 
 class ApiKey {
