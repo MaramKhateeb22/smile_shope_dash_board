@@ -54,3 +54,15 @@ class EditCategoryFailure extends CategoryState {
 
   EditCategoryFailure({required this.errMessage});
 }
+
+//add subcategory
+
+class AddSubCategoryLoading extends CategoryState {}
+
+class AddSubCategorySuccess extends CategoryState {}
+
+class AddSubCategoryFailure extends CategoryState {
+  final String errMessage;
+
+  AddSubCategoryFailure({required this.errMessage});
+}

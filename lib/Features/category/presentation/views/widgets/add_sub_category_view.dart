@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:io';
 
@@ -13,8 +12,8 @@ import 'package:smile_shope_dash_board/Features/category/presentation/manager/ca
 import 'package:smile_shope_dash_board/Features/category/presentation/manager/category_state.dart';
 
 class AddSubCategoryView extends StatefulWidget {
-   AddSubCategoryView({super.key,required this.categoryId});
- String categoryId;
+  AddSubCategoryView({super.key, required this.categoryId});
+  String categoryId;
   @override
   State<AddSubCategoryView> createState() => _AddSubCategoryViewState();
 }
@@ -45,18 +44,14 @@ class _AddSubCategoryViewState extends State<AddSubCategoryView> {
     });
 
     try {
-    
-      final bytes =
-
-      await _image!.readAsBytes();
+      final bytes = await _image!.readAsBytes();
       final String base64Image = base64Encode(bytes);
 
       // إعداد البيانات لإرسالها إلى الـ API
       final String title = _textController.text;
 
-
       if (title.isEmpty) {
-      print(' t tnull');
+        print(' t tnull');
       }
 
       // if (compressedImage == null) {
@@ -65,26 +60,27 @@ class _AddSubCategoryViewState extends State<AddSubCategoryView> {
       final Map<String, dynamic> data = {
         'title2': title,
         'image2': base64Image,
-        'category_id':'15'
+        'category_id': widget.categoryId
         // widget.categoryId,
-
       };
+      print('the category id is : ${widget.categoryId}');
       const String username = '11184828';
       const String password = '60-dayfreetrial';
       // التأكد من أن البيانات التي نرسلها صحيحة
       print('Data being sent to the API: $data');
 
       // إرسال البيانات إلى الـ API
-      const String apiUrl = 'http://yomnabaksmawi-001-site1.ltempurl.com/api/subcategory/add';
+      const String apiUrl =
+          'http://yomnabaksmawi-001-site1.ltempurl.com/api/subcategory/add';
       final response = await http.post(
         Uri.parse(apiUrl),
         // headers: {'Content-Type': 'application/json'},
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Basic ' + base64Encode(utf8.encode('$username:$password')),
+          'Authorization':
+              'Basic ' + base64Encode(utf8.encode('$username:$password')),
         },
-        body:
-        jsonEncode(data),
+        body: jsonEncode(data),
       );
 
       setState(() {
@@ -108,14 +104,14 @@ class _AddSubCategoryViewState extends State<AddSubCategoryView> {
   Widget build(BuildContext context) {
     return BlocConsumer<CategoryCubit, CategoryState>(
       listener: (context, state) {
-        if (state is AddCategorySuccess) {
+        if (state is AddSubCategorySuccess) {
           context.replace('/category_main_all_body');
         }
       },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('إضافة صنف '),
+            title: const Text(' إضافة صنف فرعي'),
           ),
           body: SingleChildScrollView(
             child: Center(
@@ -134,39 +130,42 @@ class _AddSubCategoryViewState extends State<AddSubCategoryView> {
                         if (_image != null)
                           kIsWeb
                               ? FutureBuilder(
-                            future: _image!.readAsBytes(),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.done) {
-                                if (snapshot.hasError) {
-                                  return const Text("Error loading image");
-                                }
-                                final bytes = snapshot.data as Uint8List;
-                                return Image.memory(bytes);
-                              } else {
-                                return const CircularProgressIndicator();
-                              }
-                            },
-                          )
+                                  future: _image!.readAsBytes(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      if (snapshot.hasError) {
+                                        return const Text(
+                                            "Error loading image");
+                                      }
+                                      final bytes = snapshot.data as Uint8List;
+                                      return Image.memory(bytes);
+                                    } else {
+                                      return const CircularProgressIndicator();
+                                    }
+                                  },
+                                )
                               : Image.file(File(_image!.path)),
                         const SizedBox(height: 16.0),
                         TextField(
                           controller: _textController,
                           decoration: const InputDecoration(
-                            labelText: 'Enter text',
+                            labelText: 'ادخل اسم الصنف الفرعي',
                           ),
                         ),
                         const SizedBox(height: 16.0),
                         ElevatedButton(
                           onPressed: _pickImage,
-                          child: const Text('Pick Image'),
+                          child: const Text('ارفع صورة'),
                         ),
                         const SizedBox(height: 16.0),
                         ElevatedButton(
-                          onPressed: ()async{
+                          onPressed: () async {
                             _uploadImage();
-
                           },
-                          child: _isLoading ? const CircularProgressIndicator() : const Text('Upload'),
+                          child: _isLoading
+                              ? const CircularProgressIndicator()
+                              : const Text('حفظ'),
                         ),
                         if (_response != null) ...[
                           const SizedBox(height: 16.0),
@@ -184,5 +183,3 @@ class _AddSubCategoryViewState extends State<AddSubCategoryView> {
     );
   }
 }
-
-

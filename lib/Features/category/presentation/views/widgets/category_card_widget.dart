@@ -3,9 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smile_shope_dash_board/Features/category/data/models/category_all_get_model.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/sub_category_view_body.dart';
-
-// import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
-
 import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/row_with_icons_for_card_product_or_category.dart';
@@ -116,6 +113,7 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                   // context.go('${widget.nextPageInIconDetail}');
                   print(widget.id);
                 },
+                // print('dllllldiejflejfaljoiejofjel'+'${widget.data!.id}'),
                 //delelte
                 onTap: () {
                   print('deleteeee Category');
@@ -125,7 +123,8 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                   print(widget.id);
                   // buildShwoDialogDelete(context, widget.id);
                 },
-                id: widget.data?.id,
+                // id: widget.data?.id,
+                id: widget.id,
                 title: widget.title,
                 nextPageInIconDetail: widget.nextPageInIconDetail,
                 isShowSubCategory: widget.isShowSubCategory,

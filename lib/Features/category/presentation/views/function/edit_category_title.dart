@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/foundation.dart'; // لتحديد إذا كنا نعمل على الويب
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +25,8 @@ class EditCategoryMainViewBody extends StatefulWidget {
 class _EditCategoryMainViewBodyState extends State<EditCategoryMainViewBody> {
   XFile? _image;
   final _picker = ImagePicker();
-  final TextEditingController _textController = TextEditingController();
+  final TextEditingController _textController =
+      TextEditingController(text: 'title');
   bool _isLoading = false;
   String? _response;
 
@@ -42,6 +42,12 @@ class _EditCategoryMainViewBodyState extends State<EditCategoryMainViewBody> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _textController.text = widget.title;
+  }
+
   Future<void> _uploadImage() async {
     // if (_image == null) return;
 
@@ -50,67 +56,30 @@ class _EditCategoryMainViewBodyState extends State<EditCategoryMainViewBody> {
     });
 
     try {
-      // final filePath = _image!.path;
-      // final compressedImage = await FlutterImageCompress.compressWithFile(
-      //   filePath,
-      //   minHeight: 800,
-      //   minWidth: 800,
-      //   quality: 90,
-      // );
-      // final String base64Image = base64Encode(compressedImage!.toList());
-      //
-
-      // تحويل الصورة إلى base64
-      //
       final bytes = await _image!.readAsBytes();
       final String base64Image = base64Encode(bytes);
 
       // إعداد البيانات لإرسالها إلى الـ API
       final String title = _textController.text;
-
-      // if (title.isEmpty) {
-      //   print(' t tnull');
-      // }
-
-      // if (compressedImage == null) {
-      //   print('imag tnull');
-      // }
       Map<String, dynamic> data; // تعريف المتغير هنا
 
       if (_image == null) {
-        data = {'title1': title ?? widget.title, 'image': base64Image};
+        data = {'title1': title ?? widget.title, 'image': widget.image};
+        print('doneeeeeeeeeeeeee');
       } else {
         data = {'title1': title ?? widget.title, 'image': base64Image};
       }
 
       const String username = '11184828';
       const String password = '60-dayfreetrial';
-// التأكد من أن البيانات التي نرسلها صحيحة
-      // print('Data being sent to the API: $data');
-
-      // if (_image == null) {
-      //   final Map<String, dynamic> data = {
-      //     'title1': title ?? widget.title,
-      //   };
-      // } else {
-      //   final Map<String, dynamic> data = {
-      //     'title1': title ?? widget.title,
-      //     'image': base64Image
-      //   };
-      // }
-      // const String username = '11184828';
-      // const String password = '60-dayfreetrial';
-      // التأكد من أن البيانات التي نرسلها صحيحة
-      // print('Data being sent to the API: $data');
-
-      // إرسال البيانات إلى الـ API
+      print('ddddddddddddddddddddddddddddddddddddddddddddddddddddddd' +
+          widget.id);
       String apiUrl =
           'http://yomnabaksmawi-001-site1.ltempurl.com/api/category/update/${widget.id}';
       print('ddddddddddddddddddddddddddddddddddddddddddddddddddddddd' +
           widget.id);
       final response = await http.post(
         Uri.parse(apiUrl),
-        // headers: {'Content-Type': 'application/json'},
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
@@ -130,10 +99,10 @@ class _EditCategoryMainViewBodyState extends State<EditCategoryMainViewBody> {
       // طباعة الرد من الخادم لتحليل الأخطاء
       print('API Response: ${response.body}');
     } catch (e) {
-      setState(() {
-        _isLoading = false;
-        _response = 'Upload Failed: $e';
-      });
+      // setState(() {
+      //   _isLoading = false;
+      //   _response = 'Upload Failed: $e';
+      // });
     }
   }
 
@@ -148,7 +117,7 @@ class _EditCategoryMainViewBodyState extends State<EditCategoryMainViewBody> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('إضافة صنف '),
+            title: const Text('تعديل صنف '),
           ),
           body: SingleChildScrollView(
             child: Center(
@@ -202,7 +171,7 @@ class _EditCategoryMainViewBodyState extends State<EditCategoryMainViewBody> {
                           },
                           child: _isLoading
                               ? const CircularProgressIndicator()
-                              : const Text('رفع '),
+                              : const Text('تعديل '),
                         ),
                         if (_response != null) ...[
                           const SizedBox(height: 16.0),

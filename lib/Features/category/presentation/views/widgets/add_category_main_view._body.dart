@@ -122,7 +122,7 @@ class _AddCategoryMainViewBodyState extends State<AddCategoryMainViewBody> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('إضافة صنف '),
+            title: const Text('إضافة صنف رئيسي   '),
           ),
           body: SingleChildScrollView(
             child: Center(

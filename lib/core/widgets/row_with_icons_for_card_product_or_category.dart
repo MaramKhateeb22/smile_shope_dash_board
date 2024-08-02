@@ -88,11 +88,12 @@ class _RowWithIconsState extends State<RowWithIcons> {
               context.goNamed(
                 'edit_category_main_view_body',
                 pathParameters: {
-                  'category_id': widget.title!,
+                  'category_id': widget.id.toString(),
                   'category_image': widget.image!,
                   'category_title': widget.title!,
                 },
               );
+              print('the id is:' + '${widget.id}');
               // buildShwoDialogEdit(
               // context, widget.id.toString(), widget.image!, widget.title!);
             },
