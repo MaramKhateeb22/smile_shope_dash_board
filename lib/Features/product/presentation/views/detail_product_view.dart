@@ -6,7 +6,7 @@ import 'package:smile_shope_dash_board/Features/product/presentation/views/widge
 
 class DetailProductView extends StatelessWidget {
   DetailProductView({Key? key, required this.product}) : super(key: key);
-  Data product;
+  ProductGetAllModel product;
   // int id;
   @override
   Widget build(BuildContext context) {

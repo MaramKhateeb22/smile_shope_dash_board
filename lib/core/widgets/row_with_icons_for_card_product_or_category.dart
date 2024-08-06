@@ -8,10 +8,13 @@ class RowWithIcons extends StatefulWidget {
       this.isDisplayFlotaingButton = false,
       this.isShowSubCategory = false,
       this.title,
-      required this.id,
+      this.id,
       required this.onTap,
       required this.onpressed,
-      this.image});
+      this.image,
+      this.child
+      // required this.onEdit
+      });
   String? nextPageInIconDetail;
   String? title;
   int? id;
@@ -20,6 +23,8 @@ class RowWithIcons extends StatefulWidget {
   final bool isDisplayFlotaingButton;
   final Function() onTap;
   final Function() onpressed;
+  // final Function() onEdit;
+  IconButton? child;
   @override
   State<RowWithIcons> createState() => _RowWithIconsState();
 }
@@ -83,25 +88,28 @@ class _RowWithIconsState extends State<RowWithIcons> {
               isHoveredIconEdite = false;
             });
           },
-          child: IconButton(
-            onPressed: () {
-              context.goNamed(
-                'edit_category_main_view_body',
-                pathParameters: {
-                  'category_id': widget.id.toString(),
-                  'category_image': widget.image!,
-                  'category_title': widget.title!,
-                },
-              );
-              print('the id is:' + '${widget.id}');
-              // buildShwoDialogEdit(
-              // context, widget.id.toString(), widget.image!, widget.title!);
-            },
-            icon: Icon(
-              Icons.edit,
-              size: isHoveredIconEdite ? 27 : 23,
-            ),
-          ),
+          child: widget.child,
+          // child: IconButton(
+          //   onPressed: widget.onEdit,
+          //   // () {
+
+          //   // context.goNamed(
+          //   //   'edit_category_main_view_body',
+          //   //   pathParameters: {
+          //   //     'category_id': widget.id.toString(),
+          //   //     'category_image': widget.image!,
+          //   //     'category_title': widget.title!,
+          //   //   },
+          //   // );
+          //   // print('the id is:' + '${widget.id}');
+          //   // buildShwoDialogEdit(
+          //   // context, widget.id.toString(), widget.image!, widget.title!);
+          //   // },
+          //   icon: Icon(
+          //     Icons.edit,
+          //     size: isHoveredIconEdite ? 27 : 23,
+          //   ),
+          // ),
         ),
         const Spacer(
           flex: 1,

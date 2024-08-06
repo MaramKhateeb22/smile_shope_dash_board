@@ -18,11 +18,11 @@ class _AllProductViewBodyState extends State<AllProductViewBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(right: 80, top: 15, left: 80),
+        padding: const EdgeInsets.only(right: 80, top: 50, left: 80),
         child: FutureBuilder<dynamic>(
           future: context
               .read<ProductCubit>()
-              .getAllProducts(), // الوظيفة التي تحصل على البيانات من API
+              .getAllProductsDetail(), // الوظيفة التي تحصل على البيانات من API
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -31,7 +31,7 @@ class _AllProductViewBodyState extends State<AllProductViewBody> {
             //   return Center(child: Text('حدث خطأ: ${snapshot.error}'));
             // }
             else {
-              ProductGetAllModel allProduct =
+              List<ProductGetAllModel> allProduct =
                   context.read<ProductCubit>().allProduct!;
               // print(
               // "kkkkkkkkkkkkkkkkkkkkkkkkkkkallproduct" "${allProduct.data}");
@@ -44,10 +44,10 @@ class _AllProductViewBodyState extends State<AllProductViewBody> {
                 },
                 builder: (context, state) {
                   return GridView.builder(
-                    itemCount: allProduct.data!.length,
+                    itemCount: allProduct.length,
                     itemBuilder: (context, index) {
                       return CustomAllProductWidget(
-                        product: allProduct.data![index],
+                        product: allProduct[index],
                       );
                     },
                     gridDelegate:

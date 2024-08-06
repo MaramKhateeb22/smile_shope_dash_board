@@ -3,11 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart'; // لتحديد إذا كنا نعمل على الويب
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/manager/category_cubit.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/manager/category_state.dart';
 
@@ -78,17 +77,18 @@ class _AddSubCategoryViewState extends State<AddSubCategoryView> {
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
-              'Basic ' + base64Encode(utf8.encode('$username:$password')),
+              'Basic ${base64Encode(utf8.encode('$username:$password'))}',
         },
         body: jsonEncode(data),
       );
 
       setState(() {
         _isLoading = false;
-        _response = response.statusCode == 200
-            ? 'Upload Successful!'
-            : 'Upload Failed: ${response.body}';
+        // _response = response.statusCode == 200
+        // ? 'Upload Successful!'
+        // : 'Upload Failed: ${response.body}';
       });
+      context.go('/category_main_all_body');
 
       // طباعة الرد من الخادم لتحليل الأخطاء
       print('API Response: ${response.body}');

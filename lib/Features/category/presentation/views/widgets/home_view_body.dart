@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smile_shope_dash_board/Features/colorproduct/presentation/views/add_color_view.dart';
+import 'package:smile_shope_dash_board/Features/colorproduct/presentation/views/all_color_view.dart';
+import 'package:smile_shope_dash_board/Features/size/presentation/views/add_size_view.dart';
+import 'package:smile_shope_dash_board/Features/size/presentation/views/all_size_view.dart';
+import 'package:smile_shope_dash_board/Features/users/presentation/view/all_users.dart';
 
 import '../../../../product/presentation/views/add_product_view.dart';
 import '../../../../product/presentation/views/all_product_view.dart';
@@ -20,6 +25,11 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     const addCategoryMainView(),
     const AllProductView(),
     const AddProductView(),
+    const AddSizeView(),
+    const AllSizeView(),
+    const AllColorView(),
+    const AddColorView(),
+     AllUsers(),
   ];
 
   late Widget _body = const CategoryMainAllBody();
@@ -41,7 +51,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 decoration: BoxDecoration(
                   color: Colors.blue,
                 ),
-                child: Text('Drawer Header'),
+                child: Text('الصفحة الرئيسية'),
               ),
             ),
             ExpansionTile(
@@ -86,12 +96,13 @@ class _HomeViewBodyState extends State<HomeViewBody> {
               children: [
                 ListTile(
                   onTap: () {
-                    setState(
-                      () {
-                        context.go('/all_product_view');
-                        _body = screens[2];
-                      },
-                    );
+                    context.go('/all_product_view');
+                    _body = screens[2];
+                    // setState(
+                    //   () {
+
+                    //   },
+                    // );
                   },
                   title: const Text('كل المنتجات'),
                   leading: const Icon(Icons.align_horizontal_left_rounded),
@@ -113,6 +124,87 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             ),
             const Divider(
               height: 0,
+            ),
+            ExpansionTile(
+              title: const Text('الاحجام'),
+              children: [
+                ListTile(
+                  onTap: () {
+                    context.go('/all_size_view');
+                    _body = screens[5];
+                    // setState(
+                    //   () {
+
+                    //   },
+                    // );
+                  },
+                  title: const Text('كل الاحجام'),
+                  leading: const Icon(Icons.align_horizontal_left_rounded),
+                ),
+                ListTile(
+                  onTap: () {
+                    // setState(
+                    // () {
+
+                    // },
+                    context.go('/add_size_view');
+                    _body = screens[4];
+                    // );
+                  },
+                  title: const Text('إضافة حجم'),
+                  leading: const Icon(Icons.add_circle_outline),
+                ),
+              ],
+            ),
+            const Divider(
+              height: 0,
+            ),
+            ExpansionTile(
+              title: const Text('الالوان'),
+              children: [
+                ListTile(
+                  onTap: () {
+                    context.go('/all_color_view');
+                    _body = screens[6];
+                    // setState(
+                    //   () {
+
+                    //   },
+                    // );
+                  },
+                  title: const Text('كل الالوان'),
+                  leading: const Icon(Icons.align_horizontal_left_rounded),
+                ),
+                ListTile(
+                  onTap: () {
+                    // setState(
+                    // () {
+
+                    // },
+                    context.go('/add_color_view');
+                    _body = screens[7];
+                    // );
+                  },
+                  title: const Text('إضافة لون'),
+                  leading: const Icon(Icons.add_circle_outline),
+                ),
+              ],
+            ),
+            const Divider(
+              height: 0,
+            ),
+            ExpansionTile(
+              title: const Text('المستخدمين'),
+              children: [
+                ListTile(
+                  onTap: () {
+                    context.go('/all_users_view');
+                    _body = screens[8];
+                  },
+                  title: const Text('كل المستخدمين'),
+                  leading: const Icon(Icons.align_horizontal_left_rounded),
+                ),
+              ],
             ),
           ],
         ),

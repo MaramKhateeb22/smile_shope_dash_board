@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smile_shope_dash_board/Features/category/data/models/category_all_get_model.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/views/widgets/sub_category_view_body.dart';
+
 import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/row_with_icons_for_card_product_or_category.dart';
@@ -129,6 +130,23 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                 nextPageInIconDetail: widget.nextPageInIconDetail,
                 isShowSubCategory: widget.isShowSubCategory,
                 isDisplayFlotaingButton: widget.isDisplayFlotaingButton,
+                child: IconButton(
+                  onPressed: () {
+                    context.goNamed(
+                      'edit_category_main_view_body',
+                      pathParameters: {
+                        'category_id': widget.id.toString(),
+                        'category_image': widget.image,
+                        'category_title': widget.title,
+                      },
+                    );
+                    print('the id is:' '${widget.id}');
+                  },
+                  icon: Icon(
+                    Icons.edit,
+                    size: isHoveredIconEdite ? 27 : 23,
+                  ),
+                ),
               ),
               const Spacer(
                 flex: 1,

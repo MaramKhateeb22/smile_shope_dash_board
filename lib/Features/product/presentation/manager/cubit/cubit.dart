@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_add_model';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_delete_modle.dart';
@@ -22,18 +21,19 @@ class ProductCubit extends Cubit<ProductState> {
   // ProductCubit get(context) => BlocProvider.of(context);
   // ApiConsumer api;
   ProductRepo productRepo;
-  ProductGetAllModel? allProduct;
+  List<ProductGetAllModel>? allProduct;
   ProductDeleteModel? deleteProduct;
   AddPrdouctModel? addproduct;
   String? image;
   String? base64string;
   final formkey = GlobalKey<FormState>();
+  final formkeyEditProdcut = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController detailController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   Uint8List? imageProduct;
-  
+
   void setImage(String imageProduct) {
     image = imageProduct;
   }
@@ -47,7 +47,7 @@ class ProductCubit extends Cubit<ProductState> {
     XFile? file = await imagepicker.pickImage(source: source);
     // file = await imagepicker.pickImage(source: source);
     if (file != null) {
-      return await file!.readAsBytes();
+      return await file.readAsBytes();
     } else {
       message(context, 'No Image Selected');
       print('No Image Selected');
@@ -66,8 +66,7 @@ class ProductCubit extends Cubit<ProductState> {
     //   );
     // base64string = base64Encode(compressedImage!.toList());
 
-
-      base64string = base64.encode(img);
+    base64string = base64.encode(img);
     // setImage(base64string);
     // print('\n'
     //     'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh $base64string'
@@ -110,15 +109,29 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ClearFormState());
   }
 
-  getAllProducts() async {
+  // getAllProducts() async {
+  //   emit(AllProductsLoadingState());
+  //   final response = await productRepo.productGetAll();
+  //   response.fold((errMessage) {
+  //     emit(AllProductsFailerState(error: errMessage));
+  //     // print('55555555555555555555555551111111111155');
+  //   }, (product) {
+  //     allProduct = product;
+  //     allProduct!.data!.sort((a, b) => a.createdAt!.compareTo(b.createdAt!));
+  //     // print('222222222222222' "allProduct!.data![0].productName!");
+  //     emit(AllProductsSuccessState());
+  //   });
+  // }
+
+  getAllProductsDetail() async {
     emit(AllProductsLoadingState());
-    final response = await productRepo.productGetAll();
+    final response = await productRepo.productGetAllDetail();
     response.fold((errMessage) {
       emit(AllProductsFailerState(error: errMessage));
       // print('55555555555555555555555551111111111155');
     }, (product) {
       allProduct = product;
-      allProduct!.data!.sort((a, b) => a.createdAt!.compareTo(b.createdAt!));
+      // allProduct!.!.sort((a, b) => a.createdAt!.compareTo(b.createdAt!));
       // print('222222222222222' "allProduct!.data![0].productName!");
       emit(AllProductsSuccessState());
     });
@@ -136,5 +149,31 @@ class ProductCubit extends Cubit<ProductState> {
       emit(AllProductsSuccessState());
       message(context, 'تم الحذف بنجاح');
     });
+  }
+
+  editProductFunction(context, String id,
+      {String? producName,
+      String? productPrice,
+      String? detail,
+      String? image,
+      int? subCategoryId}) async {
+    emit(EditProductLoadingState());
+    final response = await productRepo.editPorduct(
+        id: id,
+        producName: producName,
+        productPrice: productPrice,
+        detail: detail,
+        subCategoryId: subCategoryId,
+        image: image);
+    response.fold(
+      (errMessage) {
+        emit(EditProductFailerState(error: errMessage));
+        message(context, errMessage);
+      },
+      (category) {
+        emit(EditProductSuccessState());
+        message(context, 'تم التعديل بنجاح');
+      },
+    );
   }
 }

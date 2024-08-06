@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:smile_shope_dash_board/Features/category/data/models/category_all_get_Sub_Category_model.dart';
 import 'package:smile_shope_dash_board/Features/category/data/models/category_delete_model.dart';
+import 'package:smile_shope_dash_board/Features/category/data/models/sub_category_delete_model.dart';
 import 'package:smile_shope_dash_board/Features/category/presentation/manager/category_state.dart';
 import 'package:smile_shope_dash_board/core/utils/constants.dart';
 
@@ -17,6 +18,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   final CategoryRepositry categoryRepository;
   CategoryGetAllModle? allCategory;
   DeleteCategoryModel? deleteCategory;
+  DeleteSubCategoryModel? deleteSubCategory;
   List<GetAllSubCatForOneCatModel>? allSubCategoryForOneCategory;
   getAllCategory() async {
     emit(GetAllCategoryLoading());
@@ -51,6 +53,22 @@ class CategoryCubit extends Cubit<CategoryState> {
       (category) {
         deleteCategory = category;
         emit(DeleteCategorySuccess());
+        message(context, 'تم الحذف بنجاح');
+      },
+    );
+  }
+
+  deleteSubCategoryFunction(String id, context) async {
+    emit(DeleteSubCategoryLoading());
+    final response = await categoryRepository.subcategoryDelete(id);
+    response.fold(
+      (errMessage) {
+        emit(DeleteSubCategoryFailure(errMessage: errMessage));
+        message(context, errMessage);
+      },
+      (subcategory) {
+        deleteSubCategory = subcategory;
+        emit(DeleteSubCategorySuccess());
         message(context, 'تم الحذف بنجاح');
       },
     );

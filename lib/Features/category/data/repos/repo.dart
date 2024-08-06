@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:smile_shope_dash_board/Features/category/data/models/category_all_get_Sub_Category_model.dart';
 import 'package:smile_shope_dash_board/Features/category/data/models/category_all_get_model.dart';
 import 'package:smile_shope_dash_board/Features/category/data/models/category_delete_model.dart';
+import 'package:smile_shope_dash_board/Features/category/data/models/sub_category_delete_model.dart';
 import 'package:smile_shope_dash_board/core/utils/api/api_consumer.dart';
 import 'package:smile_shope_dash_board/core/utils/api/end_points.dart';
 
@@ -86,6 +87,19 @@ class CategoryRepositry {
       );
       print(" The Response Is : \n \n" '$response');
       return Right(DeleteCategoryModel.fromJson(response));
+    } on ServerException catch (e) {
+      return Left(e.errModel.errorMessage);
+    }
+  }
+
+  Future<Either<String, DeleteSubCategoryModel>> subcategoryDelete(
+      String id) async {
+    try {
+      final response = await api.post(
+        EndPoints.deleteSubCategory(id),
+      );
+      print(" The Response Is : \n \n" '$response');
+      return Right(DeleteSubCategoryModel.fromJson(response));
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     }

@@ -68,7 +68,7 @@ class _CustomAddProductWidgetState extends State<CustomAddProductWidget> {
                               color: Colors.grey.shade200,
                             ),
                             width: 300,
-                            height: 130,
+                            height: 300,
                             child: context.read<ProductCubit>().imageProduct ==
                                     null
                                 ? Container(
@@ -265,7 +265,7 @@ class _CustomAddProductWidgetState extends State<CustomAddProductWidget> {
                                                 .text,
                                             context
                                                 .read<ProductCubit>()
-                                            .base64string!,
+                                                .base64string!,
                                             ' ${subcategoryTitlesAndIds[selectedSubCategory]}',
                                             context
                                                 .read<ProductCubit>()
