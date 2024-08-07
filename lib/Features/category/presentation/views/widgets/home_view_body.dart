@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smile_shope_dash_board/Features/colorproduct/presentation/views/add_color_view.dart';
 import 'package:smile_shope_dash_board/Features/colorproduct/presentation/views/all_color_view.dart';
+import 'package:smile_shope_dash_board/Features/getMostPurchasedProducts/presentaion/views/all_MostPurchasedProducts.dart';
+import 'package:smile_shope_dash_board/Features/order/presentation/views/all_payment_proof.dart';
+import 'package:smile_shope_dash_board/Features/order/presentation/views/get_all_order_view.dart';
 import 'package:smile_shope_dash_board/Features/size/presentation/views/add_size_view.dart';
 import 'package:smile_shope_dash_board/Features/size/presentation/views/all_size_view.dart';
 import 'package:smile_shope_dash_board/Features/users/presentation/view/all_users.dart';
@@ -29,7 +32,10 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     const AllSizeView(),
     const AllColorView(),
     const AddColorView(),
-     AllUsers(),
+    const AllUsers(),
+    const GetAllOrder(),
+    const AllPaymentProof(),
+    const GetMostPurchasedProductView()
   ];
 
   late Widget _body = const CategoryMainAllBody();
@@ -203,6 +209,76 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   },
                   title: const Text('كل المستخدمين'),
                   leading: const Icon(Icons.align_horizontal_left_rounded),
+                ),
+              ],
+            ),
+            const Divider(
+              height: 0,
+            ),
+            ExpansionTile(
+              title: const Text('كل الفواتير'),
+              children: [
+                ListTile(
+                  onTap: () {
+                    context.go('/all_order_view');
+                    _body = screens[9];
+                  },
+                  title: const Text('  كل الفواتير'),
+                  leading: const Icon(Icons.align_horizontal_left_rounded),
+                ),
+                ListTile(
+                  onTap: () {
+                    context.go('/all_order_view');
+                    _body = screens[9];
+                  },
+                  title: const Text(' الفواتير المدفوعة'),
+                  leading: const Icon(Icons.align_horizontal_left_rounded),
+                ),
+                ListTile(
+                  onTap: () {
+                    context.go('/all_users_view');
+                    _body = screens[8];
+                  },
+                  title: const Text(' الفواتير غير المدفوعة'),
+                  leading: const Icon(Icons.align_horizontal_left_rounded),
+                ),
+                ListTile(
+                  onTap: () {
+                    context.go('/all_payment_proof');
+                    _body = screens[10];
+                  },
+                  title: const Text(' إثبات الدفع  '),
+                  leading: const Icon(Icons.align_horizontal_left_rounded),
+                ),
+                const Divider(
+                  height: 0,
+                ),
+              ],
+            ),
+            const Divider(
+              height: 0,
+            ),
+            ExpansionTile(
+              title: const Text('الاحصائيات'),
+              children: [
+                ListTile(
+                  onTap: () {
+                    context.go('/get_most_purchased_product');
+                    _body = screens[10];
+                  },
+                  title: const Text('  المنتجات الاكثر شراء'),
+                  leading: const Icon(Icons.align_horizontal_left_rounded),
+                ),
+                ListTile(
+                  onTap: () {
+                    context.go('/all_payment_proof');
+                    _body = screens[10];
+                  },
+                  title: const Text(' إثبات الدفع  '),
+                  leading: const Icon(Icons.align_horizontal_left_rounded),
+                ),
+                const Divider(
+                  height: 0,
                 ),
               ],
             ),

@@ -14,6 +14,15 @@ import 'package:smile_shope_dash_board/Features/colorproduct/presentation/manage
 import 'package:smile_shope_dash_board/Features/colorproduct/presentation/views/add_color_view.dart';
 import 'package:smile_shope_dash_board/Features/colorproduct/presentation/views/all_color_view.dart';
 import 'package:smile_shope_dash_board/Features/colorproduct/presentation/views/edit_color_view.dart';
+import 'package:smile_shope_dash_board/Features/getMostPurchasedProducts/data/repo/repo.dart';
+import 'package:smile_shope_dash_board/Features/getMostPurchasedProducts/presentaion/manager/cubit.dart';
+import 'package:smile_shope_dash_board/Features/getMostPurchasedProducts/presentaion/views/all_MostPurchasedProducts.dart';
+import 'package:smile_shope_dash_board/Features/order/data/model/get_all_order_model.dart';
+import 'package:smile_shope_dash_board/Features/order/data/repo/repo.dart';
+import 'package:smile_shope_dash_board/Features/order/presentation/manager/cubit.dart';
+import 'package:smile_shope_dash_board/Features/order/presentation/views/all_payment_proof.dart';
+import 'package:smile_shope_dash_board/Features/order/presentation/views/detail_order_view.dart';
+import 'package:smile_shope_dash_board/Features/order/presentation/views/get_all_order_view.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
 import 'package:smile_shope_dash_board/Features/product/data/repo/repo.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
@@ -203,6 +212,34 @@ final GoRouter _router = GoRouter(
         return const AllUsers();
       },
     ),
+    GoRoute(
+      path: '/all_order_view',
+      builder: (BuildContext context, GoRouterState state) {
+        return const GetAllOrder();
+      },
+    ),
+    GoRoute(
+      path: '/all_payment_proof',
+      builder: (BuildContext context, GoRouterState state) {
+        return const AllPaymentProof();
+      },
+    ),
+    GoRoute(
+      path: '/get_most_purchased_product',
+      builder: (BuildContext context, GoRouterState state) {
+        return const GetMostPurchasedProductView();
+      },
+    ),
+    GoRoute(
+      path: '/detail_order_view',
+      name: 'detail_order_view',
+      builder: (BuildContext context, GoRouterState state) {
+        GetAllOrderModel order = state.extra as GetAllOrderModel;
+        return DetailOrder(
+          order: order,
+        );
+      },
+    ),
   ],
 );
 
@@ -251,6 +288,13 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+        BlocProvider<GetMostPurchasedProductsCubit>(
+          create: (context) => GetMostPurchasedProductsCubit(
+            getMostPurchasedProductsReoposetry(
+              api: DioConsumer(dio: Dio()),
+            ),
+          ),
+        ),
         BlocProvider<AllUsersCubit>(
           create: (context) => AllUsersCubit(
             UsersRepositry(
@@ -259,6 +303,11 @@ class MyApp extends StatelessWidget {
               ..numberUsers()
               ..usersGetAll(),
           ),
+        ),
+        BlocProvider<GetAllOrderCubit>(
+          create: (context) => GetAllOrderCubit(OrderRepositry(
+            api: DioConsumer(dio: Dio()),
+          )),
         ),
       ],
       child: MaterialApp.router(

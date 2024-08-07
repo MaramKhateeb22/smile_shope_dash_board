@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:smile_shope_dash_board/Features/product/data/model/number_product_model.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_add_model';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_delete_modle.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
@@ -28,7 +29,7 @@ class ProductCubit extends Cubit<ProductState> {
   String? base64string;
   final formkey = GlobalKey<FormState>();
   final formkeyEditProdcut = GlobalKey<FormState>();
-
+  NumberPorductModel? numberproduct;
   TextEditingController nameController = TextEditingController();
   TextEditingController detailController = TextEditingController();
   TextEditingController priceController = TextEditingController();
@@ -173,6 +174,20 @@ class ProductCubit extends Cubit<ProductState> {
       (category) {
         emit(EditProductSuccessState());
         message(context, 'تم التعديل بنجاح');
+      },
+    );
+  }
+
+  getNumberProductsCubit() async {
+    emit(numberProductLoadingState());
+    final response = await productRepo.numberProducts();
+    response.fold(
+      (errMessage) => emit(numberProductFailerState(error: errMessage)),
+      (productnumber) {
+        numberproduct = productnumber;
+        emit(
+          numberProductSuccessState(numberPorductl: productnumber),
+        );
       },
     );
   }

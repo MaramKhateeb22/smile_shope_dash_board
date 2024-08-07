@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smile_shope_dash_board/Features/product/data/model/number_product_model.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/cubit.dart';
 import 'package:smile_shope_dash_board/Features/product/presentation/manager/cubit/state.dart';
@@ -14,6 +15,13 @@ class AllProductViewBody extends StatefulWidget {
 }
 
 class _AllProductViewBodyState extends State<AllProductViewBody> {
+  @override
+  void initState() {
+    context.read<ProductCubit>().getNumberProductsCubit();
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +41,8 @@ class _AllProductViewBodyState extends State<AllProductViewBody> {
             else {
               List<ProductGetAllModel> allProduct =
                   context.read<ProductCubit>().allProduct!;
+              NumberPorductModel numberPorduct =
+                  context.read<ProductCubit>().numberproduct!;
               // print(
               // "kkkkkkkkkkkkkkkkkkkkkkkkkkkallproduct" "${allProduct.data}");
               return BlocConsumer<ProductCubit, ProductState>(
@@ -43,19 +53,54 @@ class _AllProductViewBodyState extends State<AllProductViewBody> {
                   setState(() {});
                 },
                 builder: (context, state) {
-                  return GridView.builder(
-                    itemCount: allProduct.length,
-                    itemBuilder: (context, index) {
-                      return CustomAllProductWidget(
-                        product: allProduct[index],
-                      );
-                    },
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisSpacing: 40,
-                      childAspectRatio: 2 / 1.6,
-                      crossAxisSpacing: 60,
-                      crossAxisCount: 3,
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        BlocBuilder<ProductCubit, ProductState>(
+                          builder: (context, state) {
+                            if (state is numberProductSuccessState) {
+                              return Text(
+                                '  عدد المنتجات'
+                                ' : '
+                                '${state.numberPorductl.numberOfProducts}',
+                                style: const TextStyle(
+                                    fontSize: 25, color: Colors.red),
+                              );
+                            } else if (state is numberProductFailerState) {
+                              return Text(state.error);
+                            } else if (state is numberProductLoadingState) {
+                              return const CircularProgressIndicator();
+                            } else {
+                              return Text(
+                                ' عدد المنتجات  '
+                                ' : '
+                                '${numberPorduct.numberOfProducts}',
+                                style: const TextStyle(
+                                    fontSize: 25, color: Colors.red),
+                              );
+                            }
+                          },
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        GridView.builder(
+                          shrinkWrap: true,
+                          itemCount: allProduct.length,
+                          itemBuilder: (context, index) {
+                            return CustomAllProductWidget(
+                              product: allProduct[index],
+                            );
+                          },
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisSpacing: 40,
+                            childAspectRatio: 2 / 1.6,
+                            crossAxisSpacing: 60,
+                            crossAxisCount: 3,
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 },

@@ -104,7 +104,7 @@ class DetailProductForsubcategoryViewBody extends StatelessWidget {
                               Text(
                                 'اللون: ${color.colorName}',
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold, fontSize: 15),
                               ),
                               // عرض الأحجام الخاصة بكل لون
                               if (color.sizes != null &&
@@ -115,7 +115,8 @@ class DetailProductForsubcategoryViewBody extends StatelessWidget {
                                       .map((size) => Text(
                                             'المقاس: ${size.sizeName}, الكمية: ${size.quantity}, السعر: ${size.price}',
                                             style: const TextStyle(
-                                                color: Colors.green),
+                                                color: Colors.green,
+                                                fontSize: 15),
                                           ))
                                       .toList(),
                                 ),

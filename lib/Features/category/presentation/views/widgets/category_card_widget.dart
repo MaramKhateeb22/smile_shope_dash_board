@@ -71,12 +71,12 @@ class _CategoryCardWidgetState extends State<CategoryCardWidget> {
                   Container(
                     height: 300,
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
                           topRight: Radius.circular(15),
                         ),
-                        color: colorGrey),
+                        color: Color.fromARGB(255, 231, 231, 231)),
                     // child:Image.network(widget.data.)
                     child: ImageWithAuth(
                       imageUrl: widget.image,

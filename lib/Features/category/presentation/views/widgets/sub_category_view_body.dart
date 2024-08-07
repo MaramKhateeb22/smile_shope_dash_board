@@ -37,7 +37,8 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               print(snapshot.error);
-              return Center(child: Text('يوجد خطأ: ${snapshot.error}'));
+              // return Center(child: Text('يوجد خطأ: ${snapshot.error}'));
+              return const Center(child: Text('لا يوجد أصناف فرعبة'));
             } else {
               List<GetAllSubCatForOneCatModel?> allSubCategory =
                   context.read<CategoryCubit>().allSubCategoryForOneCategory!;
@@ -59,7 +60,7 @@ class _SubGategoryViewBodyState extends State<SubGategoryViewBody> {
                                 ? 2
                                 : 1,
                         // crossAxisCount: 4,
-                        childAspectRatio: 1 / 1.45,
+                        childAspectRatio: 1 / 1.2,
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 20),
                     itemCount: allSubCategory.length,

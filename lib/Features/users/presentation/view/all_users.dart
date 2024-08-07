@@ -52,8 +52,9 @@ class _AllUsersState extends State<AllUsers> {
                   builder: (context, state) {
                     if (state is GetNumberUsersStateSuccess) {
                       return Text(
-                        '${state.numberUserModel.numberOfUsers}'
-                        '      :المستخدمين',
+                        '  عدد المستخدمين'
+                        ' : '
+                        '${state.numberUserModel.numberOfUsers}',
                         style: const TextStyle(fontSize: 25, color: Colors.red),
                       );
                     } else if (state is GetNumberUsersStateFailure) {
@@ -62,7 +63,9 @@ class _AllUsersState extends State<AllUsers> {
                       return const CircularProgressIndicator();
                     } else {
                       return Text(
-                        '${numberUseres.numberOfUsers}' ' :     المستخدمين',
+                        ' المستخدمين  '
+                        ' : '
+                        '${numberUseres.numberOfUsers}',
                         style: const TextStyle(fontSize: 25, color: Colors.red),
                       );
                     }

@@ -1,3 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:smile_shope_dash_board/Features/product/data/model/number_product_model.dart';
+
 abstract class ProductState {}
 
 class ProductImageInitalState extends ProductState {}
@@ -71,4 +74,20 @@ class EditProductFailerState extends ProductState {
   final String error;
 
   EditProductFailerState({required this.error});
+}
+
+//Number Product
+class numberProductLoadingState extends ProductState {}
+
+class numberProductSuccessState extends ProductState {
+  NumberPorductModel numberPorductl;
+  numberProductSuccessState({
+    required this.numberPorductl,
+  });
+}
+
+class numberProductFailerState extends ProductState {
+  final String error;
+
+  numberProductFailerState({required this.error});
 }

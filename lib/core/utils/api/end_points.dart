@@ -12,6 +12,12 @@ class EndPoints {
   static String addCategory = "category/add";
   static String addSize = "size/add";
   static String addColor = "color/add";
+  static String getAllOrder = "order/getAllOrders";
+  static String getAllOrderPaid = "getpaidBills";
+  static String getAllOrderUnPaid = "getUnpaidBills";
+  static String getMostPurchasedProducts = "getMostPurchasedProducts";
+  static String paymentProof = "payment-proofs";
+  static String numberProducts = "product/countProducts";
 
   static String deleteProduct(String id) {
     return "product/delete/$id";

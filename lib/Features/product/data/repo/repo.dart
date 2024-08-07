@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/edit_prodcut_model.dart';
+import 'package:smile_shope_dash_board/Features/product/data/model/number_product_model.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_add_model';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_delete_modle.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
@@ -125,6 +126,18 @@ class ProductRepo {
       });
       print(" The Response Is : \n \n" '$response');
       return Right(EditProductModel.fromJson(response));
+    } on ServerException catch (e) {
+      return Left(e.errModel.errorMessage);
+    }
+  }
+
+  Future<Either<String, NumberPorductModel>> numberProducts() async {
+    try {
+      final response = await api.get(
+        EndPoints.numberProducts,
+      );
+
+      return Right(NumberPorductModel.fromJson(response));
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     }

@@ -81,6 +81,14 @@ class _CustomAllProductWidgetForSubCategorytState
 
                             isShowSubCategory: true,
                             nextPageInIconDetail: '/detail_product_view',
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.edit,
+                                size: 23,
+                                color: Colors.white,
+                              ),
+                            ),
                             onTap: () {
                               print('deleteeee Products');
                               context
