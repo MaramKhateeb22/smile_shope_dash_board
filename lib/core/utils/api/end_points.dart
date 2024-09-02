@@ -16,6 +16,7 @@ class EndPoints {
   static String getAllOrderPaid = "getpaidBills";
   static String getAllOrderUnPaid = "getUnpaidBills";
   static String getMostPurchasedProducts = "getMostPurchasedProducts";
+  static String getAllNumber = "product/getcounts";
   static String paymentProof = "payment-proofs";
   static String numberProducts = "product/countProducts";
 
@@ -61,6 +62,10 @@ class EndPoints {
 
   static String editColor(String id) {
     return "color/update/$id";
+  }
+
+  static String verifyPaid(String id) {
+    return "verify-payment/$id";
   }
 }
 

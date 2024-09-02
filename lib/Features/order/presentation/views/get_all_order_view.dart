@@ -38,6 +38,9 @@ class _GetAllOrderState extends State<GetAllOrder> {
           if (snap.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
+          // if (snap.data == null) {
+          //   return const Center(child: Text(" لا يوجد فواتير   "));
+          // }
           if (snap.hasError) {
             return const Text("Something has error");
           } else {

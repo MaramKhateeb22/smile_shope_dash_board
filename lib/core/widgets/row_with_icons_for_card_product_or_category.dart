@@ -46,6 +46,7 @@ class _RowWithIconsState extends State<RowWithIcons> {
         ),
         Text(
           "${widget.title}",
+          overflow: TextOverflow.clip,
           style: const TextStyle(fontSize: 25),
         ),
         const Spacer(

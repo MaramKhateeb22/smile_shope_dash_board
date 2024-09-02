@@ -253,8 +253,11 @@ class _AllProductForSubCategoryState extends State<AllProductForSubCategory> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             }
-            // else if (snapshot.hasError) {
-            //   return Center(child: Text('حدث خطأ: ${snapshot.error}'));
+            // else
+
+            // if (snapshot.data == null) {
+            //   return const Center(
+            //       child: Text('لا يوجد منتجات لهذا الصنف الفرعي'));
             // }
             else {
               // List<AllProductForSubCategoryModel?> allSubCategory =

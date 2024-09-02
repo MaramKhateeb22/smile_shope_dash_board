@@ -21,12 +21,12 @@ class getMostPurchasedProductsModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['product_name'] = this.productName;
-    data['image1'] = this.image1;
-    data['product_price'] = this.productPrice;
-    data['total_purchases'] = this.totalPurchases;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['product_name'] = productName;
+    data['image1'] = image1;
+    data['product_price'] = productPrice;
+    data['total_purchases'] = totalPurchases;
     return data;
   }
 }

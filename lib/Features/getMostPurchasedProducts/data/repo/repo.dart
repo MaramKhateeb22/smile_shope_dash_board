@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:smile_shope_dash_board/Features/getMostPurchasedProducts/data/model/getAllNumber.dart';
 import 'package:smile_shope_dash_board/Features/getMostPurchasedProducts/data/model/getMostPurchasedProducts_model.dart';
 import 'package:smile_shope_dash_board/Features/order/data/model/show_payment_proof.dart';
 import 'package:smile_shope_dash_board/core/utils/api/api_consumer.dart';
@@ -33,11 +34,23 @@ class getMostPurchasedProductsReoposetry {
     }
   }
 
+  Future<Either<String, getAllNumberModel>> getAllnumberRepo() async {
+     try {
+      final response = await api.get(
+        EndPoints.getAllNumber,
+      );
+
+      return Right(getAllNumberModel.fromJson(response));
+    } on ServerException catch (e) {
+      return Left(e.errModel.errorMessage);
+    }
+  }
+
   Future<Either<String, ShowAllPaymentProofModel>> paymentProofsAll() async {
-    try {
+   try {
       final response = await api.get(
         EndPoints.paymentProof,
-      );
+      ); 
 
       return Right(ShowAllPaymentProofModel.fromJson(response));
     } on ServerException catch (e) {

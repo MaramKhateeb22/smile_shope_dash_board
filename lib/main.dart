@@ -17,11 +17,18 @@ import 'package:smile_shope_dash_board/Features/colorproduct/presentation/views/
 import 'package:smile_shope_dash_board/Features/getMostPurchasedProducts/data/repo/repo.dart';
 import 'package:smile_shope_dash_board/Features/getMostPurchasedProducts/presentaion/manager/cubit.dart';
 import 'package:smile_shope_dash_board/Features/getMostPurchasedProducts/presentaion/views/all_MostPurchasedProducts.dart';
+import 'package:smile_shope_dash_board/Features/getMostPurchasedProducts/presentaion/views/all_number.dart';
 import 'package:smile_shope_dash_board/Features/order/data/model/get_all_order_model.dart';
+import 'package:smile_shope_dash_board/Features/order/data/model/get_all_order_model_unpaid.dart';
+import 'package:smile_shope_dash_board/Features/order/data/model/get_all_order_paid_model.dart';
 import 'package:smile_shope_dash_board/Features/order/data/repo/repo.dart';
 import 'package:smile_shope_dash_board/Features/order/presentation/manager/cubit.dart';
 import 'package:smile_shope_dash_board/Features/order/presentation/views/all_payment_proof.dart';
+import 'package:smile_shope_dash_board/Features/order/presentation/views/detail_order_paid_view.dart';
+import 'package:smile_shope_dash_board/Features/order/presentation/views/detail_order_unpaid_view.dart';
 import 'package:smile_shope_dash_board/Features/order/presentation/views/detail_order_view.dart';
+import 'package:smile_shope_dash_board/Features/order/presentation/views/get_all_order_paid_view.dart';
+import 'package:smile_shope_dash_board/Features/order/presentation/views/get_all_order_unpaid_view.dart';
 import 'package:smile_shope_dash_board/Features/order/presentation/views/get_all_order_view.dart';
 import 'package:smile_shope_dash_board/Features/product/data/model/product_get_all_model.dart';
 import 'package:smile_shope_dash_board/Features/product/data/repo/repo.dart';
@@ -219,6 +226,18 @@ final GoRouter _router = GoRouter(
       },
     ),
     GoRoute(
+      path: '/all_order_paid_view',
+      builder: (BuildContext context, GoRouterState state) {
+        return const GetAllOrderPaid();
+      },
+    ),
+    GoRoute(
+      path: '/all_order_Unpaid_view',
+      builder: (BuildContext context, GoRouterState state) {
+        return const GetAllOrderUnPaid();
+      },
+    ),
+    GoRoute(
       path: '/all_payment_proof',
       builder: (BuildContext context, GoRouterState state) {
         return const AllPaymentProof();
@@ -231,12 +250,39 @@ final GoRouter _router = GoRouter(
       },
     ),
     GoRoute(
+      path: '/get_all_number',
+      builder: (BuildContext context, GoRouterState state) {
+        return const AllNumberView();
+      },
+    ),
+    GoRoute(
       path: '/detail_order_view',
       name: 'detail_order_view',
       builder: (BuildContext context, GoRouterState state) {
         GetAllOrderModel order = state.extra as GetAllOrderModel;
         return DetailOrder(
           order: order,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/detail_order_paid_view',
+      name: 'detail_order_paid_view',
+      builder: (BuildContext context, GoRouterState state) {
+        GetAllOrderPaidModel orderpaid = state.extra as GetAllOrderPaidModel;
+        return DetailOrderPaid(
+          orderPaid: orderpaid,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/detail_order_unPaid_view',
+      name: 'detail_order_unPaid_view',
+      builder: (BuildContext context, GoRouterState state) {
+        GetAllOrderUnPaidModel orderpaid =
+            state.extra as GetAllOrderUnPaidModel;
+        return DetailOrderUnPaid(
+          orderunpaid: orderpaid,
         );
       },
     ),

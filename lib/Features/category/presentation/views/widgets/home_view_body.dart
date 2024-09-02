@@ -3,7 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:smile_shope_dash_board/Features/colorproduct/presentation/views/add_color_view.dart';
 import 'package:smile_shope_dash_board/Features/colorproduct/presentation/views/all_color_view.dart';
 import 'package:smile_shope_dash_board/Features/getMostPurchasedProducts/presentaion/views/all_MostPurchasedProducts.dart';
+import 'package:smile_shope_dash_board/Features/getMostPurchasedProducts/presentaion/views/all_number.dart';
 import 'package:smile_shope_dash_board/Features/order/presentation/views/all_payment_proof.dart';
+import 'package:smile_shope_dash_board/Features/order/presentation/views/get_all_order_paid_view.dart';
+import 'package:smile_shope_dash_board/Features/order/presentation/views/get_all_order_unpaid_view.dart';
 import 'package:smile_shope_dash_board/Features/order/presentation/views/get_all_order_view.dart';
 import 'package:smile_shope_dash_board/Features/size/presentation/views/add_size_view.dart';
 import 'package:smile_shope_dash_board/Features/size/presentation/views/all_size_view.dart';
@@ -35,7 +38,10 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     const AllUsers(),
     const GetAllOrder(),
     const AllPaymentProof(),
-    const GetMostPurchasedProductView()
+    const GetMostPurchasedProductView(),
+    const GetAllOrderPaid(),
+    const GetAllOrderUnPaid(),
+    const AllNumberView()
   ];
 
   late Widget _body = const CategoryMainAllBody();
@@ -228,16 +234,16 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 ),
                 ListTile(
                   onTap: () {
-                    context.go('/all_order_view');
-                    _body = screens[9];
+                    context.go('/all_order_paid_view');
+                    _body = screens[11];
                   },
                   title: const Text(' الفواتير المدفوعة'),
                   leading: const Icon(Icons.align_horizontal_left_rounded),
                 ),
                 ListTile(
                   onTap: () {
-                    context.go('/all_users_view');
-                    _body = screens[8];
+                    context.go('/all_order_Unpaid_view');
+                    _body = screens[12];
                   },
                   title: const Text(' الفواتير غير المدفوعة'),
                   leading: const Icon(Icons.align_horizontal_left_rounded),
@@ -271,10 +277,10 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 ),
                 ListTile(
                   onTap: () {
-                    context.go('/all_payment_proof');
-                    _body = screens[10];
+                    context.go('/get_all_number');
+                    _body = screens[14];
                   },
-                  title: const Text(' إثبات الدفع  '),
+                  title: const Text(' كامل الاحصائيات   '),
                   leading: const Icon(Icons.align_horizontal_left_rounded),
                 ),
                 const Divider(

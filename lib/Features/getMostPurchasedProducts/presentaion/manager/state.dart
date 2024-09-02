@@ -14,3 +14,15 @@ class GetMostPurchasedProductsFailureState
 
   GetMostPurchasedProductsFailureState({required this.errMessaGe});
 }
+class AllNumberLoadinGState
+    extends GetMostPurchasedProductsState {}
+
+class AllNumberSuccessState
+    extends GetMostPurchasedProductsState {}
+
+class AllNumberFailureState
+    extends GetMostPurchasedProductsState {
+  final String errMessaGe;
+
+  AllNumberFailureState({required this.errMessaGe});
+}
